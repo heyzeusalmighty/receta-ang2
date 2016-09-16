@@ -1,0 +1,31 @@
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+
+const appRoutes: Routes = [
+
+    {
+        path: 'dashboard',
+        component: DashboardComponent
+    },
+    {
+        path: 'recipes',
+        component: RecipesComponent
+    },
+    {
+        path: 'detail/:id',
+        component: RecipeDetailComponent
+    },
+
+
+    {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
+    }
+]
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

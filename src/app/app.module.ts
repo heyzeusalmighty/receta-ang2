@@ -1,20 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { MdButtonModule } from '@angular2-material/button';
+import { MdCardModule } from '@angular2-material/card';
+import { MdMenuModule } from '@angular2-material/menu';
+import { MdToolbarModule } from '@angular2-material/toolbar';
+import { MdIconModule } from '@angular2-material/icon';
+import { MdSidenavModule } from '@angular2-material/sidenav';
+import { MdInputModule } from '@angular2-material/input';
+import { MdListModule } from '@angular2-material/list';
+
 
 import { AppComponent } from './app.component';
+import { routing } from './app.routing';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RecipesComponent } from './recipes/recipes.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecipeDetailComponent,
+    DashboardComponent,
+    RecipesComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
-    HttpModule
+    routing,
+    MdButtonModule.forRoot(),
+    MdCardModule.forRoot(),
+    MdMenuModule.forRoot(),
+    MdToolbarModule.forRoot(),
+    MdIconModule.forRoot(),
+    MdSidenavModule.forRoot(),
+    MdInputModule.forRoot(),
+    MdListModule.forRoot()
   ],
   providers: [],
+  entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

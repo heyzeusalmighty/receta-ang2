@@ -1,0 +1,13 @@
+<h3>
+	Newest Recipes
+</h3>
+
+<div class="card-container">
+<md-card *ngFor="let recipe of recipes" >
+	<md-card-title color="primary">{{recipe.name}}</md-card-title>
+	<md-card-content>{{recipe.description}}</md-card-content>
+	<md-card-actions>
+		<button md-button (click)="gotoRecipe(recipe)">VIEW</button>
+	</md-card-actions>
+</md-card>
+</div>

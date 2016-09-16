@@ -1,3 +1,53 @@
-<h1>
-  {{title}}
-</h1>
+
+
+
+
+
+
+<md-sidenav-layout>
+    <md-sidenav #start (open)="mybutton.focus()" mode="over">
+		Links
+		<md-nav-list>
+			<a md-list-item routerLink="/dashboard">Home</a>
+			<a md-list-item routerLink="/recipes">Recipes</a>
+		</md-nav-list>
+
+		<button md-button #mybutton (click)="start.close()">Close</button>
+
+
+    </md-sidenav>
+    <md-sidenav #end align="end">
+      End Sidenav.
+      <button md-button (click)="end.close()">Close</button>
+    </md-sidenav>
+
+	<md-toolbar color="primary">
+		
+		<button class="app-icon-button" (click)="start.toggle()">
+      		<i class="material-icons app-toolbar-menu">menu</i>
+    	</button>
+
+		<span>All These Recipes</span>
+
+	</md-toolbar>
+
+<!--
+	<header>
+		<nav>
+			<ul>
+				<a routerLink="/dashboard">Home</a>
+				<a routerLink="/recipes">Recipes</a>			
+			</ul>
+		</nav>
+	</header>-->
+
+
+	<section id="main">
+
+		<router-outlet></router-outlet>
+
+	</section>
+
+
+</md-sidenav-layout>
+

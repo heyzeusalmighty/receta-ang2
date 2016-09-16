@@ -1,0 +1,12 @@
+
+
+<h3>Recipes</h3>
+
+<ul class="recipes">
+  <li *ngFor="let recipe of recentRecipes"
+    [class.selected]="recipe === selectedRecipe"
+    (click)="gotoRecipe(recipe)">
+    <span class="badge">{{recipe.id}}</span> {{recipe.name}}
+  </li>
+</ul>
+<!--<app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>-->

@@ -1,0 +1,32 @@
+
+
+<div *ngIf="recipe">
+	<h2>{{recipe.name}} details!</h2>
+	<div>
+		<label>id: </label>{{recipe.id}}
+	</div>
+	
+
+	<md-card class="app-input-section">
+		
+		<md-input placeholder="Recipe Name" [(ngModel)]="recipe.name"></md-input>
+
+		<md-input placeholder="Description" [(ngModel)]="recipe.description"></md-input>
+
+		<md-input placeholder="Serving Size" [(ngModel)]="recipe.servingSize"></md-input>
+
+	</md-card>
+		
+
+<br />
+
+
+<!--
+    ingredients: string[];
+    instructions: string[];
+    tags: number[];-->
+
+
+	<button (click)="goBack()">Back</button>
+</div>
+
