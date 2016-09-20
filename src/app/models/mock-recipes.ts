@@ -1,9 +1,6 @@
 import { Recipe } from './recipe';
 
 export const RECIPES: Recipe[] = [
-  
-  
-  
   {id: 11, name: 'Mr. Nice', description: 'good to eat', servingSize: '', ingredients: [], instructions: [], tags: []},
   {id: 12, name: 'Narco', description: 'good to eat', servingSize: '', ingredients: [], instructions: [], tags: []},
   {id: 13, name: 'Bombasto', description: 'good to eat', servingSize: '', ingredients: [], instructions: [], tags: []},

@@ -1,11 +1,11 @@
-/* tslint:disable:no-unused-variable */
+// /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
-import { RecipesComponent } from './recipes.component';
+// import { TestBed, async } from '@angular/core/testing';
+// import { RecipesComponent } from './recipes.component';
 
-describe('Component: Recipes', () => {
-  it('should create an instance', () => {
-    let component = new RecipesComponent();
-    expect(component).toBeTruthy();
-  });
-});
+// describe('Component: Recipes', () => {
+//   it('should create an instance', () => {
+//     let component = new RecipesComponent();
+//     expect(component).toBeTruthy();
+//   });
+// });
