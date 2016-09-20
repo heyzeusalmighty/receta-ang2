@@ -27,3 +27,20 @@ button:disabled {
   color: #ccc; 
   cursor: auto;
 }
+
+
+[md-list-avatar] {
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.ing-button {
+  margin-bottom: 10px;
+}
+
+.instruction-number {
+  margin-right: 10px;
+}

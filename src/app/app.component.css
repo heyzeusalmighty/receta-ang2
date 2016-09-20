@@ -48,3 +48,8 @@ nav a.active {
   text-align: left;
   text-decoration: none;
 }
+
+#main {
+  margin-left: 20px;
+  margin-right: 10px;
+}

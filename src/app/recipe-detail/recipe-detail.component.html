@@ -9,11 +9,36 @@
 
 	<md-card class="app-input-section">
 		
-		<md-input placeholder="Recipe Name" [(ngModel)]="recipe.name"></md-input>
+		<md-input placeholder="Recipe Name" [(ngModel)]="recipe.name" class="full-width"></md-input>
 
-		<md-input placeholder="Description" [(ngModel)]="recipe.description"></md-input>
+		<md-input placeholder="Description" [(ngModel)]="recipe.description" class="full-width"></md-input>
 
-		<md-input placeholder="Serving Size" [(ngModel)]="recipe.servingSize"></md-input>
+		<md-input placeholder="Serving Size" [(ngModel)]="recipe.servingSize" class="full-width"></md-input>
+
+
+		<!-- INGREDIENTS -->
+		<button md-raised-button (click)="addIngredient()" class="ing-button">Add Ingredient</button>
+		<br />
+		<md-list dense>
+			<md-list-item *ngFor="let ing of recipe.ingredients; let i = index; trackBy: custom">
+				<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
+				<md-input placeholder="ingredient" [(ngModel)]="recipe.ingredients[i]"></md-input>
+			</md-list-item>
+		</md-list>
+
+
+		<!-- INSTRUCTIONS -->
+		<button md-raised-button (click)="addInstruction()" class="ing-button">Add Instruction</button>
+		<br />
+		<md-list dense>
+			<md-list-item *ngFor="let ins of recipe.instructions; let i = index; trackBy: custom" #instructions>
+				<md-icon md-list-avatar (click)="deleteInstruction(i)">delete</md-icon>
+				<strong class="instruction-number">{{i + 1}}. </strong>
+				<md-input placeholder="instruction" class="full-width" [(ngModel)]="recipe.instructions[i]" (keypress)="checkingForEnter($event, i)" ></md-input>
+			</md-list-item>
+		</md-list>
+
+
 
 	</md-card>
 		
@@ -24,7 +49,8 @@
 <!--
     ingredients: string[];
     instructions: string[];
-    tags: number[];-->
+    tags: number[];
+-->
 
 
 	<button (click)="goBack()">Back</button>
