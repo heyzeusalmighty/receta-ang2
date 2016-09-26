@@ -22,9 +22,12 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.recipeService.getRecipe(id)
-        .then(recipe => this.recipe = recipe);
+      let id = params['id'];
+      this.recipeService.getRecipeObservable(id)
+        .subscribe(recipe => this.recipe = recipe,
+        err => { console.log(err)});
+
+        //.then(recipe => this.recipe = recipe);
     })
   }
 
@@ -48,11 +51,14 @@ export class RecipeDetailComponent implements OnInit {
   checkingForEnter(event, index): void {
     //keycode of the enter key is 13 btw
     if(event.keyCode === 13) {
-      console.log('this is it!!! => ', index);
       this.addInstruction();
       console.log('inputs', this.inputs);
       //this.recipe.instructions
     }
+  }
+
+  updateRecipe(): void {
+    console.log('saving');
   }
 
 

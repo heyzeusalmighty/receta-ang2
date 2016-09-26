@@ -25,7 +25,7 @@ export class RecipesComponent implements OnInit {
   }
 
   gotoRecipe(recipe: Recipe): void {
-    let link = ['/detail', recipe.id];
+    let link = ['/detail', recipe._id];
     this.router.navigate(link);
 
   }

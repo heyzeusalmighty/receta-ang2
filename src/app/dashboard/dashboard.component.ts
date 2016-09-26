@@ -16,11 +16,15 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.recipeService.getRecipes().then(recipes => this.recipes = recipes.slice(1, 5));
+    //this.recipeService.getRecipes().then(recipes => this.recipes = recipes.slice(1, 5));
+    this.recipeService.getRecipesObservable()
+        .subscribe(recipes => this.recipes = recipes,
+        err => { console.log(err); });
   }
 
   gotoRecipe(recipe: Recipe): void {
-    let link = ['/detail', recipe.id];
+    console.log('recipe', recipe._id)
+    let link = ['/detail', recipe._id];
     this.router.navigate(link);
 
   }

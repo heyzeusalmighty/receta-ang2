@@ -1,7 +1,7 @@
 
 
 export class Recipe {
-    id: number;
+    _id: string;
     name: string;
     description: string;
     servingSize: string;
