@@ -40,7 +40,7 @@ export class RecipeService {
 
 	getRecipeObservable(id: string): Observable<Recipe> {
 		//return this.getRecipes().find(rec => rec.id === id);
-		console.log(' i am getting a single recipe => ', id);
+		//console.log(' i am getting a single recipe => ', id);
 		return this.http.get(`${this.recipesUrl}/${id}`)
 						.map((res: Response) => res.json())
 						.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
@@ -48,7 +48,8 @@ export class RecipeService {
 
 	addRecipe (body: Object): Observable<Recipe[]> {
         let bodyString 	= JSON.stringify(body); // Stringify payload
-        let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        
+		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options		= new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.recipesUrl, body, options) // ...using post request

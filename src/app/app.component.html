@@ -8,8 +8,8 @@
     <md-sidenav #start (open)="mybutton.focus()" mode="over">
 		Links
 		<md-nav-list>
-			<a md-list-item routerLink="/dashboard">Home</a>
-			<a md-list-item routerLink="/recipes">Recipes</a>
+			<a md-list-item routerLink="/dashboard" (click)="start.close()">Home</a>
+			<a md-list-item routerLink="/recipes" (click)="start.close()">Recipes</a>
 		</md-nav-list>
 
 		<button md-button #mybutton (click)="start.close()">Close</button>

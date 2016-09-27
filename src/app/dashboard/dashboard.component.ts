@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   gotoRecipe(recipe: Recipe): void {
     console.log('recipe', recipe._id)
-    let link = ['/detail', recipe._id];
+    let link = ['/view', recipe._id];
     this.router.navigate(link);
 
   }

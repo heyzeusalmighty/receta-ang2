@@ -2,6 +2,10 @@
 
 <h3>Recipes</h3>
 
+<button md-icon-button (click)="addNewRecipe()">
+  <i class="material-icons">add_circle_outline</i>
+</button>
+
 <ul class="recipes">
   <li *ngFor="let recipe of recentRecipes"
     [class.selected]="recipe === selectedRecipe"
@@ -9,4 +13,13 @@
     <span class="badge">{{recipe.id}}</span> {{recipe.name}}
   </li>
 </ul>
+
+
+<md-list>
+  <md-list-item *ngFor="let recipe of recentRecipes"
+    (click)="gotoRecipe(recipe)">
+    <span class="badge">{{recipe.id}}</span> {{recipe.name}}
+  </md-list-item>
+</md-list>
+
 <!--<app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>-->

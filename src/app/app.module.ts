@@ -17,6 +17,7 @@ import { routing } from './app.routing';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RecipesComponent } from './recipes/recipes.component';
     AppComponent,
     RecipeDetailComponent,
     DashboardComponent,
-    RecipesComponent
+    RecipesComponent,
+    RecipeViewComponent
   ],
   imports: [
     BrowserModule,

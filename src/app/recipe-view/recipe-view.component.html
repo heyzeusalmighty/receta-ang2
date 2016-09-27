@@ -1,0 +1,28 @@
+
+
+<div *ngIf="recipe">
+	<md-card>
+		<md-card-title>{{recipe.name}}</md-card-title>
+		<md-card-subtitle>{{recipe.description}}</md-card-subtitle>		
+
+		<md-card-content>
+			<p>Serving Size : {{recipe.servingSize}}</p>
+			
+			<h5>Ingredients</h5>
+			<ul>
+				<li *ngFor="let ing of recipe.ingredients">{{ing}}</li>
+			</ul>
+			
+			<h5>Instructions</h5>
+			<ol>
+				<li *ngFor="let ins of recipe.instructions">{{ins}}</li>
+			</ol>
+		</md-card-content>
+		<md-card-actions>
+			<button md-raised-button (click)="goBack()">BACK</button>
+			<button md-raised-button (click)="editRecipe()">EDIT</button>
+			<button md-raised-button (click)="deleteRecipe()">DELETE</button>
+		</md-card-actions>
+	</md-card>
+
+</div>

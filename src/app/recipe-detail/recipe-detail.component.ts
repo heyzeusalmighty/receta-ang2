@@ -12,54 +12,74 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  @Input() recipe: Recipe;
-  @ContentChildren(MdInputModule) inputs: QueryList<MdInputModule>;
-
-  constructor(
-    private recipeService: RecipeService,
-    private route: ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      let id = params['id'];
-      this.recipeService.getRecipeObservable(id)
-        .subscribe(recipe => this.recipe = recipe,
-        err => { console.log(err)});
-
-        //.then(recipe => this.recipe = recipe);
-    })
-  }
+	@Input() recipe: Recipe;
+	@ContentChildren(MdInputModule) inputs: QueryList<MdInputModule>;
 
 
-  addIngredient(): void {
-    this.recipe.ingredients.push("1 tsp of marjoram");
-  }
+	constructor(
+		private recipeService: RecipeService,
+		private route: ActivatedRoute
+	) { }
 
-  deleteIngredient(index): void {
-    this.recipe.ingredients.splice(index, 1);
-  }
+	ngOnInit(): void {
+		console.log('params : ', this.route.params);
+		this.route.params.forEach((params: Params) => {
+			let id = params['id'];
+			if(id.length > 0) { 
+				this.recipeService.getRecipeObservable(id)
+					.subscribe(
+						recipe => this.recipe = recipe,
+						err =>  console.log(err)
+					);
+			}
+		});
 
-  addInstruction(): void {
-    this.recipe.instructions.push("");    
-  }
+		// this is a new recipe
+		if(this.recipe === undefined) {
+			console.log('recipe is not defined');
+			this.recipe = new Recipe();
+			this.recipe.ingredients = [];
+			this.recipe.instructions = [];
+			this.recipe.tags = [];
+		} 
+  	}
 
-  deleteInstruction(index):void {
-    this.recipe.instructions.splice(index, 1);
-  }
 
-  checkingForEnter(event, index): void {
-    //keycode of the enter key is 13 btw
-    if(event.keyCode === 13) {
-      this.addInstruction();
-      console.log('inputs', this.inputs);
-      //this.recipe.instructions
-    }
-  }
+	addIngredient(): void {
+		this.recipe.ingredients.push("1 tsp of marjoram");
+	}
 
-  updateRecipe(): void {
-    console.log('saving');
-  }
+	deleteIngredient(index): void {
+		this.recipe.ingredients.splice(index, 1);
+	}
+
+	addInstruction(): void {
+		this.recipe.instructions.push("");    
+	}
+
+	deleteInstruction(index):void {
+		this.recipe.instructions.splice(index, 1);
+	}
+
+	checkingForEnter(event, index): void {
+		//keycode of the enter key is 13 btw
+		if(event.keyCode === 13) {
+			this.addInstruction();
+			console.log('inputs', this.inputs);
+		}
+	}
+
+	updateRecipe(): void {
+		console.log('saving');
+		this.recipeService.addRecipe(this.recipe)
+			.subscribe(
+				updatedRecipe => { 
+					console.log('done ');
+					window.history.back();
+				},
+				err => console.log(err)
+			);		
+	}
 
 
 

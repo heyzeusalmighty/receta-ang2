@@ -21,8 +21,25 @@ router.get('/:id', (req, res) => {
     Recipe.findById(recipeId, (err, recipe) => {
         if (err) return console.error(err);
         res.json(recipe);
-    })
-})
+    });
+});
+
+router.post('/', (req, res) => {
+    console.log('body  :: ', req.body);
+
+    let query = { '_id': req.body._id };
+    Recipe.findOneAndUpdate(query, req.body, {upsert: true}, (err, doc) => {
+        if (err) return console.error(err);
+        res.send("success");
+    }) 
+
+    // Recipe.findById(req.body._id, (err, doc) => {
+    //     if (err) return console.error(err);
+
+    // })
+
+    //res.send('hey')
+});
 
 
 

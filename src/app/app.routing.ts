@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 const appRoutes: Routes = [
 
@@ -19,8 +20,10 @@ const appRoutes: Routes = [
         path: 'detail/:id',
         component: RecipeDetailComponent
     },
-
-
+    {
+        path: 'view/:id',
+        component: RecipeViewComponent
+    },
     {
         path: '',
         redirectTo: '/dashboard',

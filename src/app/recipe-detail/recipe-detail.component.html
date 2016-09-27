@@ -1,15 +1,10 @@
 
 
 <div *ngIf="recipe">
-	<h2>{{recipe.name}} details!</h2>
-	<div>
-		<label>id: </label>{{recipe.id}}
-	</div>
 	
-
 	<md-card class="app-input-section">
-
 		
+		<md-card-title>{{recipe.name}}</md-card-title>
 		
 		<md-input placeholder="Recipe Name" [(ngModel)]="recipe.name" class="full-width"></md-input>
 

@@ -16,19 +16,29 @@ export class RecipesComponent implements OnInit {
 
   constructor(private router: Router, private recipeService: RecipeService) { }
 
-  ngOnInit() {
-    this.getRecipes();
-  }
+	ngOnInit() {
+		this.getRecipes();
+	}
 
-  getRecipes(): void {
-    this.recipeService.getRecipes().then(recipes => this.recentRecipes = recipes);   
-  }
+	getRecipes(): void {
+	//this.recipeService.getRecipes().then(recipes => this.recentRecipes = recipes);
+		this.recipeService.getRecipesObservable()
+			.subscribe(
+				recipes => this.recentRecipes = recipes,
+				err =>  console.log(err)
+		);
+	}
 
-  gotoRecipe(recipe: Recipe): void {
-    let link = ['/detail', recipe._id];
-    this.router.navigate(link);
+	addNewRecipe(): void {
+		console.log('lets add a recipe');
+		let link = ['/detail', ''];
+		this.router.navigate(link);
+	}
 
-  }
+	gotoRecipe(recipe: Recipe): void {
+		let link = ['/view', recipe._id];
+		this.router.navigate(link);
+	}
 
 
 
