@@ -17,6 +17,10 @@ const appRoutes: Routes = [
         component: RecipesComponent
     },
     {
+        path: 'new',
+        component: RecipeDetailComponent
+    },
+    {
         path: 'detail/:id',
         component: RecipeDetailComponent
     },

@@ -10,7 +10,12 @@ import { RecipeService } from '../recipe.service';
 	styleUrls: ['./recipe-view.component.css']
 })
 export class RecipeViewComponent implements OnInit {
+	
 	@Input() recipe: Recipe;
+	deleting: boolean = false;
+	response: String = "";
+
+
 	constructor(
 		private recipeService: RecipeService,
 		private route: ActivatedRoute,
@@ -35,7 +40,17 @@ export class RecipeViewComponent implements OnInit {
 
 	deleteRecipe(): void {
 		console.log('are you sure you want to do that?');
+		this.deleting = false;
+
+		this.recipeService.removeRecipe(this.recipe._id)
+			.subscribe((res) => this.response = res,
+			err => console.log(err)
+		);
+
+		//go back to recipes page		
+		this.router.navigate(["/recipes"]);
 	}
+
 
 
 	goBack(): void {

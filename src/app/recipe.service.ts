@@ -24,10 +24,6 @@ export class RecipeService {
 	  .then(recipes => { return recipes[0]});
   }
 
-  // editRecipe(recipe: Recipe): Promise<Recipe> {
-  //   //return this.http.put(`/cat/${cat._id}`, JSON.stringify(cat), this.options);
-
-  // }
 
   // OBSERVABLE VERSIONS
 
@@ -38,9 +34,7 @@ export class RecipeService {
 	}
 
 
-	getRecipeObservable(id: string): Observable<Recipe> {
-		//return this.getRecipes().find(rec => rec.id === id);
-		//console.log(' i am getting a single recipe => ', id);
+	getRecipeObservable(id: string): Observable<Recipe> {		
 		return this.http.get(`${this.recipesUrl}/${id}`)
 						.map((res: Response) => res.json())
 						.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
@@ -53,26 +47,15 @@ export class RecipeService {
         let options		= new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.recipesUrl, body, options) // ...using post request
-                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-                         .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+                         .map((res:Response) => res) // ...and calling .json() on the response to return data
+                         .catch((error:any) => Observable.throw(error || 'Server error')); //...errors if any
     }
-
-	// Update a comment
-    updateComment (body: Object): Observable<Recipe[]> {
-        let bodyString 	= JSON.stringify(body); // Stringify payload
-        let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        let options		= new RequestOptions({ headers: headers }); // Create a request option
-
-        return this.http.put(`${this.recipesUrl}/${body['id']}`, body, options) // ...using put request
-                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-                         .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
-    }   
-
+	
     // Delete a comment
-    removeComment (id:string): Observable<Recipe[]> {
-        return this.http.delete(`${this.recipesUrl}/${id}`) // ...using put request
-                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-                         .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    removeRecipe (id:string): Observable<String> {
+        return this.http.delete(`${this.recipesUrl}/${id}`)
+                         .map((res:Response) => res.json()) 
+                         .catch((error:any) => Observable.throw(error || 'Server error')); 
     }      
 
 

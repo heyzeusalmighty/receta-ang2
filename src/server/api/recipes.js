@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+const chalk = require('chalk');
 
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
@@ -25,21 +26,33 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log('body  :: ', req.body);
+    
+    console.log(chalk.blue('myBodyIsReady  :: ') + chalk.green(req.body));
 
     let query = { '_id': req.body._id };
+    console.log(chalk.blue("id before => ") + chalk.green(query._id));
+
+    if(!query._id) {
+        query._id = new mongoose.mongo.ObjectId();
+    }
+
+    console.log(chalk.blue("id after => ") + chalk.green(query._id));
+
     Recipe.findOneAndUpdate(query, req.body, {upsert: true}, (err, doc) => {
         if (err) return console.error(err);
-        res.send("success");
-    }) 
-
-    // Recipe.findById(req.body._id, (err, doc) => {
-    //     if (err) return console.error(err);
-
-    // })
-
-    //res.send('hey')
+        res.send(doc);
+    })    
 });
+
+router.delete('/:id', (req, res) => {
+    let recipeId = req.params.id;
+    let query = { '_id' : req.params.id };
+    Recipe.remove(query, (err) => {
+        if (err) return console.log(err);
+        res.send('success')
+    })
+
+})
 
 
 

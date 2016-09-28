@@ -31,7 +31,7 @@ export class RecipesComponent implements OnInit {
 
 	addNewRecipe(): void {
 		console.log('lets add a recipe');
-		let link = ['/detail', ''];
+		let link = ['/new', ''];
 		this.router.navigate(link);
 	}
 

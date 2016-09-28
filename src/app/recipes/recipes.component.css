@@ -1,3 +1,7 @@
 md-list-item {
     cursor: pointer;
 }
+
+.recipeDescription {
+    color: gray;
+}

@@ -18,6 +18,34 @@ body, input[text], button {
   color: #888;
   font-family: Cambria, Georgia;
 }
+
+
+
+/* flex box grid stuff */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
 /* . . . */
 /* everywhere else */
 * {
