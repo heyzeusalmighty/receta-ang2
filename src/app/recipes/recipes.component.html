@@ -2,9 +2,12 @@
 
 <h3>Recipes</h3>
 
-<button md-icon-button (click)="addNewRecipe()">
-  <i class="material-icons">add_circle_outline</i> ADD RECIPE
+
+<button md-mini-fab (click)="addNewRecipe()">
+  <!--<i class="material-icons md-24">add_circle_outline</i>-->
+  <i class="material-icons md-24">add</i>
 </button>
+
 
 <md-list>
   <md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
@@ -13,5 +16,6 @@
     <p md-line class="recipeDescription">{{recipe.description}}</p>    
   </md-list-item>
 </md-list>
+
 
 <!--<app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>-->

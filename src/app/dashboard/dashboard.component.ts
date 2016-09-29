@@ -26,7 +26,10 @@ export class DashboardComponent implements OnInit {
     console.log('recipe', recipe._id)
     let link = ['/view', recipe._id];
     this.router.navigate(link);
+  }
 
+  addNewRecipe() :void {
+    this.router.navigate(['/new']);
   }
 
 }

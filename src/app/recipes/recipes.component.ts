@@ -29,10 +29,8 @@ export class RecipesComponent implements OnInit {
 		);
 	}
 
-	addNewRecipe(): void {
-		console.log('lets add a recipe');
-		let link = ['/new', ''];
-		this.router.navigate(link);
+	addNewRecipe(): void {		
+		this.router.navigate(['/new']);
 	}
 
 	gotoRecipe(recipe: Recipe): void {

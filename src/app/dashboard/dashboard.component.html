@@ -2,6 +2,13 @@
 	Newest Recipes
 </h3>
 
+<button md-mini-fab class="upperButton" (click)="addNewRecipe()">
+  <!--<i class="material-icons md-24">add_circle_outline</i>-->
+  <i class="material-icons md-24">add</i>
+</button>
+
+
+
 <div class="card-container row">
 	<md-card *ngFor="let recipe of recipes" class="column">
 		<md-card-title color="primary">{{recipe.name}}</md-card-title>
