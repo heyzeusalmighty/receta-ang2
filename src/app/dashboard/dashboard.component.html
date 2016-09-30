@@ -2,19 +2,37 @@
 	Newest Recipes
 </h3>
 
-<button md-mini-fab class="upperButton" (click)="addNewRecipe()">
-  <!--<i class="material-icons md-24">add_circle_outline</i>-->
-  <i class="material-icons md-24">add</i>
-</button>
+<div class="row">
+	<div class="column _10">
 
+		<button md-mini-fab class="upperButton" color="primary" (click)="addNewRecipe()">		
+			<i class="material-icons md-24">add</i>
+		</button>
 
+		<br />
 
-<div class="card-container row">
-	<md-card *ngFor="let recipe of recipes" class="column">
-		<md-card-title color="primary">{{recipe.name}}</md-card-title>
-		<md-card-content>{{recipe.description}}</md-card-content>
-		<md-card-actions>
-			<button md-button (click)="gotoRecipe(recipe)">VIEW</button>
-		</md-card-actions>
-	</md-card>
+		<button md-mini-fab class="upperButton" color="primary" >
+			<i class="material-icons md-24">view_headline</i>
+		</button>
+
+	</div>
+	<!--<div class="column _10">
+		
+	</div>-->
+
+	<div class="column _80">
+		<div class="card-container">
+			<md-card *ngFor="let recipe of recipes">
+				<md-card-title color="primary">{{recipe.name}}</md-card-title>
+				<md-card-content>{{recipe.description}}</md-card-content>
+				<md-card-actions>
+					<button md-button (click)="gotoRecipe(recipe)">VIEW</button>
+				</md-card-actions>
+			</md-card>
+		</div>
+	</div>
 </div>
+
+
+
+
