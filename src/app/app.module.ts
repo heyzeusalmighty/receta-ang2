@@ -10,6 +10,7 @@ import { MdIconModule } from '@angular2-material/icon';
 import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
+import { Store, StoreModule } from '@ngrx/store';
 
 
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
+import { counterReducer } from './reducers/counter';
+import { recipeReducer } from './reducers/recipe.reducer';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
     MdIconModule.forRoot(),
     MdSidenavModule.forRoot(),
     MdInputModule.forRoot(),
-    MdListModule.forRoot()
+    MdListModule.forRoot(),
+    StoreModule.provideStore({ counter: counterReducer }, { counter: 0 }),
+    StoreModule.provideStore({ recipe: recipeReducer})
   ],
   providers: [],
   entryComponents: [AppComponent],

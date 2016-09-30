@@ -79,19 +79,25 @@ export class RecipeDetailComponent implements OnInit {
 
 	updateRecipe(): void {
 		console.log('saving');
-		this.recipeService.addRecipe(this.recipe)
-			.subscribe(
-				updatedRecipe => { 
-					console.log('done ', updatedRecipe);
-					if(this.recipe._id) {
-						window.history.back();
-					} else {
-						console.log("don't got no history");
-					}
-				},
-				err => console.log(err),
-				() => { console.log('we have finished here') }
-			);		
+		this.recipeService.addRecipeToStore(this.recipe);
+
+		if(this.recipe._id) {
+			window.history.back();
+		} else {
+			console.log("ain't got no history")
+		}
+			// .subscribe(
+			// 	updatedRecipe => { 
+			// 		console.log('done ', updatedRecipe);
+			// 		if(this.recipe._id) {
+			// 			window.history.back();
+			// 		} else {
+			// 			console.log("don't got no history");
+			// 		}
+			// 	},
+			// 	err => console.log(err),
+			// 	() => { console.log('we have finished here') }
+			// );		
 	}
 
 
