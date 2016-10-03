@@ -45,7 +45,9 @@ export class DashboardComponent implements OnInit {
     this.recipeStore.subscribe(
       data => this.recipes = data.recipes
     );
-    this.recipeService.getRecipes();
+    if(!this.recipeService.madeTheCall) {
+      this.recipeService.getRecipes();
+    }
   }
 
   gotoRecipe(recipe: Recipe): void {

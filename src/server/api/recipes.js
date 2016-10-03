@@ -38,8 +38,9 @@ router.post('/', (req, res) => {
 
     console.log(chalk.blue("id after => ") + chalk.green(query._id));
 
-    Recipe.findOneAndUpdate(query, req.body, {upsert: true}, (err, doc) => {
+    Recipe.findOneAndUpdate(query, req.body, {upsert: true, 'new': true}, (err, doc) => {
         if (err) return console.error(err);
+        console.log(chalk.blue('new/updated doc => '), chalk.green(doc));
         res.send(doc);
     })    
 });

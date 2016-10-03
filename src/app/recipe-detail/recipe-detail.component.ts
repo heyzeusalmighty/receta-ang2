@@ -79,12 +79,14 @@ export class RecipeDetailComponent implements OnInit {
 
 	updateRecipe(): void {
 		console.log('saving');
-		this.recipeService.addRecipeToStore(this.recipe);
+		let response = this.recipeService.addRecipeToStore(this.recipe);
+		console.info('response => ', response)
 
 		if(this.recipe._id) {
 			window.history.back();
 		} else {
-			console.log("ain't got no history")
+			console.log("ain't got no history");
+			window.history.back();
 		}
 			// .subscribe(
 			// 	updatedRecipe => { 
