@@ -31,8 +31,10 @@ export class RecipesComponent implements OnInit {
 	getRecipes(): void {
 		this.recipeStore = this.recipeService.getRecipeStoreObservable();
 		this.recipeStore.subscribe(
-			data => this.recentRecipes = data.recipes
-    	);
+			data => { 
+				this.recentRecipes = data.recipes;
+				this.tags = data.tags;
+		});
 
 		if(!this.recipeService.madeRecipeCall) {
 			this.recipeService.getRecipes();

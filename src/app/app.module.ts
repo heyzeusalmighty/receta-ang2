@@ -21,7 +21,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { counterReducer } from './reducers/counter';
 import { recipeReducer } from './reducers/recipe.reducer';
-import { tagReducer } from './reducers/tag.reducer';
+import { AddNewTagComponent } from './add-new-tag/add-new-tag.component';
 
 
 @NgModule({
@@ -30,7 +30,8 @@ import { tagReducer } from './reducers/tag.reducer';
     RecipeDetailComponent,
     DashboardComponent,
     RecipesComponent,
-    RecipeViewComponent
+    RecipeViewComponent,
+    AddNewTagComponent
   ],
   imports: [
     BrowserModule,

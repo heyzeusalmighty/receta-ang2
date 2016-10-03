@@ -96,6 +96,20 @@ export class RecipeService {
 			return this.http.delete(`${this.recipesUrl}/${id}`)
 												.map((res:Response) => res.json()) 
 												.catch((error:any) => Observable.throw(error || 'Server error')); 
+	}
+
+	addTag(tagName: string) {
+		let bodyString = JSON.stringify({ name: tagName });
+		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+		let options		= new RequestOptions({ headers: headers }); // Create a request option
+
+
+		return this.http.post(this.tagsUrl, bodyString, options )
+				.map((res:Response) => res)
+				.subscribe(
+					data => this.store.dispatch({ type: ADD_TAG, payload: data}),
+					error => console.error('error :: ', error)
+				)
 	}      
 
 

@@ -1,0 +1,11 @@
+
+<!--
+<button (click)="addingTag = true">Add Tag</button>-->
+
+<button md-raised-button *ngIf="!addingTag" (click)="addingTag = true" class="ing-button">Add Tag</button>
+<button md-raised-button *ngIf="addingTag" color="primary" (click)="addThisTag()" class="ing-button">Save</button>
+
+
+<div *ngIf="addingTag" class="add-tag-section">
+	<md-input placeholder="Tag Name" [(ngModel)]="newTagName" class="full-width" (keypress)="checkingForEnter($event, i)"></md-input>
+</div>

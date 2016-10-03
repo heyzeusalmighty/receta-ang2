@@ -15,7 +15,7 @@ export const RESET: string = 'RESET';
 
 let initialState = new RecipesStoreModel();
 let dummyTag = new RecipeTag();
-dummyTag.id = 1;
+dummyTag._id = "whoa what is that";
 dummyTag.name = "Desert";
 initialState.tags.push(dummyTag);
 
