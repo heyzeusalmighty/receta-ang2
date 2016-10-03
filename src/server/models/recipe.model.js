@@ -6,7 +6,7 @@ var recipeSchema = mongoose.Schema({
     servingSize: String,
     ingredients: [{type: String}],
     instructions: [{type: String}],
-    tags: [{type: Number}]
+    tags: [{type: String}]
 });
 
 var Recipe = mongoose.model('Recipe', recipeSchema);

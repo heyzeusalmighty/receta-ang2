@@ -4,22 +4,34 @@
 
 <div class="row">
 
-  <div class="column _10">
-    <button md-mini-fab (click)="addNewRecipe()">  
-      <i class="material-icons md-24">add</i>
-    </button>
-  </div>
+	<div class="column _20">
+		<button md-mini-fab (click)="addNewRecipe()">  
+			<i class="material-icons md-24">add</i>
+		</button>
+	<ul>
+		<li *ngFor="let tag of tags" (click)="filterByTag(tag)">
+			{{tag.name}}
+		</li>
+	</ul>
 
-  <div class="column _80">
+	<button (click)="addingTag = true">Add Tag</button>
+	<div *ngIf="addingTag">
+		<input type="text" />
+	</div>
+		
 
-    <md-list>
-      <md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
-        <img md-list-avatar src="assets/monkeys.jpg" alt="monkey">
-        <h5 md-line>{{recipe.name}}</h5>
-        <p md-line class="recipeDescription">{{recipe.description}}</p>    
-      </md-list-item>
-    </md-list>
+	</div>
 
-  </div>
+	<div class="column _80">
+
+		<md-list>
+			<md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
+				<img md-list-avatar src="assets/monkeys.jpg" alt="monkey">
+				<h5 md-line>{{recipe.name}}</h5>
+				<p md-line class="recipeDescription">{{recipe.description}}</p>    
+			</md-list-item>
+		</md-list>
+
+	</div>
 </div>
 

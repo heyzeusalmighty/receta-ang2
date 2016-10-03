@@ -25,6 +25,7 @@ module.exports = function(app) {
     });
     
     app.use('/api/recipes', require('./recipes'));
+    app.use('/api/tags', require('./tags'));
 
 
     // all other routes are handled by Angular

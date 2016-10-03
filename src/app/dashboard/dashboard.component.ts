@@ -5,8 +5,9 @@ import { Observable } from 'rxjs/Rx';
 
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../models/recipe';
+import { RecipesStoreModel } from '../models/recipeStoreModel';
 import { INCREMENT, DECREMENT, RESET } from '../reducers/counter';
-import { ADD_RECIPE, RecipesStoreModel } from '../reducers/recipe.reducer';
+import { ADD_RECIPE } from '../reducers/recipe.reducer';
 
 
 interface AppState {
@@ -30,9 +31,9 @@ export class DashboardComponent implements OnInit {
     private router: Router, 
     private recipeService: RecipeService, 
     public store: Store<AppState>) { 
-      this.counter = this.store.select('counter');
+        this.counter = this.store.select('counter');
       // this.recipeModels = this.store.select('recipes');
-  }
+    }
 
   ngOnInit() {
     // this is from before ngrx stores
@@ -45,9 +46,15 @@ export class DashboardComponent implements OnInit {
     this.recipeStore.subscribe(
       data => this.recipes = data.recipes
     );
-    if(!this.recipeService.madeTheCall) {
-      this.recipeService.getRecipes();
-    }
+
+
+    if(!this.recipeService.madeRecipeCall) {
+			this.recipeService.getRecipes();
+		}
+
+		if(!this.recipeService.madeTagCall) {
+			this.recipeService.getTags();
+		}
   }
 
   gotoRecipe(recipe: Recipe): void {

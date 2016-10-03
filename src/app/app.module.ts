@@ -21,6 +21,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { counterReducer } from './reducers/counter';
 import { recipeReducer } from './reducers/recipe.reducer';
+import { tagReducer } from './reducers/tag.reducer';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { recipeReducer } from './reducers/recipe.reducer';
     MdInputModule.forRoot(),
     MdListModule.forRoot(),
     StoreModule.provideStore({ counter: counterReducer }, { counter: 0 }),
-    StoreModule.provideStore({ recipe: recipeReducer})
+    StoreModule.provideStore({ recipe: recipeReducer}),
+    //StoreModule.provideStore({ tag: tagReducer })
   ],
   providers: [],
   entryComponents: [AppComponent],
