@@ -105,7 +105,7 @@ export class RecipeService {
 
 
 		return this.http.post(this.tagsUrl, bodyString, options )
-				.map((res:Response) => res)
+				.map((res:Response) => res.json())
 				.subscribe(
 					data => this.store.dispatch({ type: ADD_TAG, payload: data}),
 					error => console.error('error :: ', error)

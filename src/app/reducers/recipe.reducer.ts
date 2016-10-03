@@ -33,6 +33,8 @@ export const recipeReducer: ActionReducer<RecipesStoreModel> = (state = initialS
             return state;
 
         case ADD_TAG:
+            console.info(action.payload)
+            //let arranged = { _id: action.payload._id, name: action.payload.name };
             let newVersion = state.tags.concat(action.payload);
             return Object.assign({}, state, { tags: newVersion });
 
