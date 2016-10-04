@@ -1,26 +1,29 @@
 
 
-<h3>Recipes</h3>
+
 
 <div class="row">
 
 	<div class="column _20">
-		<button md-mini-fab (click)="addNewRecipe()">  
-			<i class="material-icons md-24">add</i>
-		</button>
-	<ul>
-		<li *ngFor="let tag of tags" (click)="filterByTag(tag)">
-			{{tag.name}}
-		</li>
-	</ul>
+		<h4>Tags</h4>
+		<app-add-new-tag></app-add-new-tag>
+		
+		<ul>
+			<li *ngFor="let tag of tags" (click)="filterByTag(tag)">
+				{{tag.name}}
+			</li>
+		</ul>
 
-	<app-add-new-tag></app-add-new-tag>
+	
 		
 
 	</div>
 
 	<div class="column _80">
-
+		<h4>Recipes</h4>
+		<button md-mini-fab (click)="addNewRecipe()">  
+			<i class="material-icons md-24">add</i>
+		</button>
 		<md-list>
 			<md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
 				<img md-list-avatar src="assets/monkeys.jpg" alt="monkey">

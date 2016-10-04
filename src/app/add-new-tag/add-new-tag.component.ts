@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 import { RecipeService } from '../recipe.service';
+
 
 @Component({
   selector: 'app-add-new-tag',
@@ -11,25 +12,36 @@ import { RecipeService } from '../recipe.service';
 })
 export class AddNewTagComponent implements OnInit {
 
-  newTagName: string = "";
-  addingTag: boolean = false;
+  addingTag: boolean = false;  
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(
+    private recipeService: RecipeService,
+    private _renderer:Renderer,
+  ) { }
 
   ngOnInit() {
   }
 
-  addThisTag() :void {
-    console.log('saving ' + this.newTagName);
-    this.addingTag = false;
-    this.recipeService.addTag(this.newTagName);
+  initiateAdding() : void {
+    this.addingTag = true;    
   }
 
-  checkingForEnter(event, index): void {
-		//keycode of the enter key is 13 btw
-		if(event.keyCode === 13) {
-      this.addThisTag();
-		}
-	}
+  addThisTag(newTagName : string) :void {
+    console.log('saving ' + newTagName);
+    this.addingTag = false;
+    this.recipeService.addTag(newTagName);
+  }
 
+  onCompletion(newTag: string) {
+    console.log('new tag name => ', newTag);   
+    this.addThisTag(newTag);
+  }
+
+  onCancellation() {
+    this.addingTag = false;
+  }
+
+  
 }
+
+
