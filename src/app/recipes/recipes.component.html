@@ -27,7 +27,7 @@
 		<md-list>
 			<md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
 				<img md-list-avatar src="assets/monkeys.jpg" alt="monkey">
-				<h5 md-line>{{recipe.name}}</h5>
+				<h5 md-line>{{recipe.recipeName}}</h5>
 				<p md-line class="recipeDescription">{{recipe.description}}</p>    
 			</md-list-item>
 		</md-list>

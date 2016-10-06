@@ -2,20 +2,31 @@
 
 <div *ngIf="recipe">
 	<md-card>
-		<md-card-title>{{recipe.name}}</md-card-title>
+		<md-card-title>{{recipe.recipeName}}</md-card-title>
 		<md-card-subtitle>{{recipe.description}}</md-card-subtitle>		
 
 		<md-card-content>
+			<p>
+				<button type="button" class="mdl-chip" *ngFor="let tag of recipe.tags">
+					<span class="mdl-chip__text">{{tag}}</span>
+				</button>
+			</p>
 			<p>Serving Size : {{recipe.servingSize}}</p>
 			
 			<h5>Ingredients</h5>
-			<ul>
-				<li *ngFor="let ing of recipe.ingredients">{{ing}}</li>
-			</ul>
+
+			<div *ngFor="let ing of recipe.ingredients">
+				<strong>{{ing.title}}</strong>
+				<ul>
+					<li *ngFor="let ingredient of ing.ingredients">
+						{{ingredient}}
+					</li>
+				</ul>
+			</div>			
 			
 			<h5>Instructions</h5>
 			<ol>
-				<li *ngFor="let ins of recipe.instructions">{{ins}}</li>
+				<li *ngFor="let ins of recipe.instructions">{{ins.instruction}}</li>
 			</ol>
 		</md-card-content>
 		<md-card-actions>

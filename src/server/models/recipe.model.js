@@ -1,11 +1,21 @@
 var mongoose = require('mongoose');
 
 var recipeSchema = mongoose.Schema({
-    name: String,
+    recipeName: String,
     description: String,
     servingSize: String,
-    ingredients: [{type: String}],
-    instructions: [{type: String}],
+    imageUrl: String,
+    source: String,
+    sourceUrl: String,
+    yummlyId: String,
+    ingredients: [{
+        title : String,
+        ingredients: [String]
+    }],
+    instructions: [{
+        id: Number,
+        instruction: String
+    }],
     tags: [{type: String}]
 });
 

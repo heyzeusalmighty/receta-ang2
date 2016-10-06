@@ -20,6 +20,7 @@ export class RecipeService {
 	tagStore: Observable<any>;
 	recipes: Array<any>;
 	tags: Array<any>;
+	selectedRecipe: Recipe;
 	madeRecipeCall: boolean = false;
 	madeTagCall: boolean = false;
 
@@ -61,6 +62,9 @@ export class RecipeService {
 	// 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	// }
 
+	// getRecipeObservable(id: string) {
+
+	// }
 
 	getRecipeObservable(id: string): Observable<Recipe> {		
 		return this.http.get(`${this.recipesUrl}/${id}`)

@@ -23,7 +23,7 @@
 	<div class="column _80">
 		<div class="card-container">
 			<md-card *ngFor="let recipe of recipes">
-				<md-card-title color="primary">{{recipe.name}}</md-card-title>
+				<md-card-title color="primary">{{recipe.recipeName}}</md-card-title>
 				<md-card-content>{{recipe.description}}</md-card-content>
 				<md-card-actions>
 					<button md-button (click)="gotoRecipe(recipe)">VIEW</button>
@@ -33,7 +33,7 @@
 	</div>
 </div>
 
-<div class="row">
+<!--<div class="row">
 	<div class="column _10">
 		<strong>STORE THINGS</strong>
 	</div>
@@ -64,7 +64,7 @@
 			<li *ngFor="let rec of recipeModels"> {{ rec.name }} </li>
 		</ul>
 	</div>
-</div>
+</div>-->
 
 
 
