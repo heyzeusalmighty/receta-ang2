@@ -23,6 +23,7 @@
 npm-debug.log
 testem.log
 /typings
+src/server/config/config.js
 
 # e2e
 /e2e/*.js

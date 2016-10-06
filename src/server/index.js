@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var morgan = require('morgan'); // logger
 var bodyParser = require('body-parser');
+var config = require('./config/config');
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -15,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+//mongoose.connect('mongodb://localhost:27017/test');
+//mongoose.connect('mongodb://heyzeusalmighty:bE8neSdiNjuQWDO4UW@ds042128.mlab.com:42128/heyreceta');
+//mongoose.connect('mongodb://recetaUser:recetaUser1@ds042128.mlab.com:42128/heyreceta');
+mongoose.connect(config.DB_ADDRESS);
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
