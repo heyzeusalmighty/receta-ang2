@@ -5,8 +5,9 @@ export class Recipe {
     recipeName: string;
     description: string;
     servingSize: string;
-    ingredients: string[];
-    instructions: string[];
+    //ingredients: [{ title: string; ingredients: string[];}];
+    ingredients: Ingredient[];
+    instructions: Instruction[];
     tags: number[];
     imageUrl: string;
     source: string;
@@ -15,4 +16,27 @@ export class Recipe {
 }
 
 
+export class Ingredient {
+    title: string;
+    ingredients: string[];
+
+    Ingredient() {
+        this.title = "";
+        this.ingredients = [""];
+    }
+}
+
+export class Instruction {
+    id: number;
+    instruction: string;
+}
+
+// ingredients: [{
+//         title : String,
+//         ingredients: [String]
+//     }],
+//     instructions: [{
+//         id: Number,
+//         instruction: String
+//     }],
 

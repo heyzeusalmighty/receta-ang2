@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ContentChildren, QueryList } from '@angular/c
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { MdInputModule } from '@angular2-material/input';
-import { Recipe } from '../models/recipe';
+import { Recipe, Ingredient, Instruction } from '../models/recipe';
 import { RecipeService } from '../recipe.service';
 
 
@@ -49,7 +49,17 @@ export class RecipeDetailComponent implements OnInit {
 
 
 	addIngredient(): void {
-		this.recipe.ingredients.push("1 tsp of marjoram");
+		var newGroup = new Ingredient();
+		console.info(' adding new ingreidnets		')
+		//newGroup.title = "";
+		//newGroup.ingredients = [];
+		console.info(' before => ', this.recipe.ingredients)
+		this.recipe.ingredients.push(newGroup);
+		console.info(' after  => ', this.recipe.ingredients)
+	}
+
+	addIngredientToGroup() :void {
+
 	}
 
 	deleteIngredient(index): void {
@@ -57,7 +67,7 @@ export class RecipeDetailComponent implements OnInit {
 	}
 
 	addInstruction(): void {
-		this.recipe.instructions.push("");    
+		this.recipe.instructions.push(new Instruction);    
 	}
 
 	deleteInstruction(index):void {
@@ -67,11 +77,12 @@ export class RecipeDetailComponent implements OnInit {
 	checkingForEnter(event, index): void {
 		//keycode of the enter key is 13 btw
 		if(event.keyCode === 13) {
-			if(this.recipe.instructions[this.recipe.instructions.length - 1].length !== 0) {
-				this.addInstruction();
-			} else {
-				console.log('empty string at the end');
-			}
+			this.addInstruction();
+			// if(this.recipe.instructions[this.recipe.instructions.length - 1].length !== 0) {
+			// 	this.addInstruction();
+			// } else {
+			// 	console.log('empty string at the end');
+			// }
 			// this.addInstruction();
 			// console.log('inputs', this.inputs);
 		}

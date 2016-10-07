@@ -7,13 +7,12 @@
 	<div class="column _20">
 		<h4>Tags</h4>
 		<app-add-new-tag></app-add-new-tag>
-		
-		<ul>
-			<li *ngFor="let tag of tags" (click)="filterByTag(tag)">
-				{{tag.name}}
-			</li>
-		</ul>
 
+		<div *ngFor="let tag of tags" >
+			<button type="button" class="mdl-chip" (click)="filterByTag(tag)">
+				<span class="mdl-chip__text">{{tag.name}}</span>
+			</button>
+		</div>
 	
 		
 

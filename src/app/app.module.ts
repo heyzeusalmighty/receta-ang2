@@ -23,6 +23,7 @@ import { counterReducer } from './reducers/counter';
 import { recipeReducer } from './reducers/recipe.reducer';
 import { AddNewTagComponent } from './add-new-tag/add-new-tag.component';
 import { AutofocusInputComponent } from './autofocus-input/autofocus-input.component';
+import { IngredientEditorComponent } from './ingredient-editor/ingredient-editor.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AutofocusInputComponent } from './autofocus-input/autofocus-input.compo
     RecipesComponent,
     RecipeViewComponent,
     AddNewTagComponent,
-    AutofocusInputComponent
+    AutofocusInputComponent,
+    IngredientEditorComponent
   ],
   imports: [
     BrowserModule,

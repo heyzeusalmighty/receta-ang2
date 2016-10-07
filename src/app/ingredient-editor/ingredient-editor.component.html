@@ -1,0 +1,13 @@
+
+<md-input placeholder="Group Name" id="groupName" #groupName [(ngModel)]="ingredientGroup.title" (keypress)="checkingForEnter($event, i)" class="full-width"></md-input>
+
+<button md-mini-fab (click)="addIngredient()">  
+	<i class="material-icons md-24">add</i>
+</button>
+<md-list dense>
+	<md-list-item *ngFor="let ing of ingredientGroup.ingredients; let i = index; trackBy: custom">				
+		<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
+		<md-input placeholder="ingredient {{i + 1}}" [(ngModel)]="ing[i]" (keypress)="checkingForEnter($event, i)"></md-input>
+	</md-list-item>
+</md-list>
+		

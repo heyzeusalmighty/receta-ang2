@@ -14,14 +14,23 @@
 
 
 		<!-- INGREDIENTS -->
-		<button md-raised-button (click)="addIngredient()" class="ing-button">Add Ingredient</button>
+		<button md-raised-button (click)="addIngredient()" class="ing-button">Add Ingredients</button>
 		<br />
-		<md-list dense>
-			<md-list-item *ngFor="let ing of recipe.ingredients; let i = index; trackBy: custom">
-				<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
-				<md-input placeholder="ingredient" [(ngModel)]="recipe.ingredients[i]"></md-input>
-			</md-list-item>
-		</md-list>
+
+		<ingredient-editor *ngFor="let ing of recipe.ingredients" [ingredientGroup]="ing" ></ingredient-editor>
+
+		<!--<div *ngFor="let ing of recipe.ingredients">
+			<md-input placeholder="ingredient group name" [(ngModel)]="ing.title"></md-input>
+			<button md-mini-fab (click)="addIngredientToGroup()">  
+				<i class="material-icons md-24">add</i>
+			</button>
+			<md-list dense>
+				<md-list-item *ngFor="let ingLine of ing.ingredients; let i = index; trackBy: custom">				
+					<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
+					<md-input placeholder="ingredient" [(ngModel)]="recipe.ingredients[i]"></md-input>
+				</md-list-item>
+			</md-list>
+		</div>-->
 
 
 		<!-- INSTRUCTIONS -->
