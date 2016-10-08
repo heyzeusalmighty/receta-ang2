@@ -10,5 +10,5 @@
 
 <div *ngIf="addingTag" class="add-tag-section">
 	<!--<md-input #tagInput placeholder="Tag Name" [(ngModel)]="newTagName" class="full-width" (keypress)="checkingForEnter($event, i)"></md-input>-->
-	<app-autofocus-input (onCompletion)="onCompletion($event)" (onCancellation)="onCancellation()"></app-autofocus-input>
+	<app-tag-input (onCompletion)="onCompletion($event)" (onCancellation)="onCancellation()"></app-tag-input>
 </div>

@@ -67,7 +67,8 @@ export class RecipeDetailComponent implements OnInit {
 	}
 
 	addInstruction(): void {
-		this.recipe.instructions.push(new Instruction);    
+		let newId = this.recipe.instructions.length + 1;
+		this.recipe.instructions.push(new Instruction(newId));    
 	}
 
 	deleteInstruction(index):void {

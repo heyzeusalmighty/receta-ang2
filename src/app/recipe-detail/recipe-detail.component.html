@@ -4,7 +4,7 @@
 	
 	<md-card class="app-input-section">
 		
-		<md-card-title>{{recipe.name}}</md-card-title>
+		<md-card-title>{{recipe.recipeName}}</md-card-title>
 		
 		<md-input placeholder="Recipe Name" [(ngModel)]="recipe.recipeName" class="full-width"></md-input>
 
@@ -19,28 +19,16 @@
 
 		<ingredient-editor *ngFor="let ing of recipe.ingredients" [ingredientGroup]="ing" ></ingredient-editor>
 
-		<!--<div *ngFor="let ing of recipe.ingredients">
-			<md-input placeholder="ingredient group name" [(ngModel)]="ing.title"></md-input>
-			<button md-mini-fab (click)="addIngredientToGroup()">  
-				<i class="material-icons md-24">add</i>
-			</button>
-			<md-list dense>
-				<md-list-item *ngFor="let ingLine of ing.ingredients; let i = index; trackBy: custom">				
-					<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
-					<md-input placeholder="ingredient" [(ngModel)]="recipe.ingredients[i]"></md-input>
-				</md-list-item>
-			</md-list>
-		</div>-->
-
-
+		<hr />
 		<!-- INSTRUCTIONS -->
 		<button md-raised-button (click)="addInstruction()" class="ing-button">Add Instruction</button>
 		<br />
 		<md-list dense>
 			<md-list-item *ngFor="let ins of recipe.instructions; let i = index; trackBy: custom" #instructions>
 				<md-icon md-list-avatar (click)="deleteInstruction(i)">delete</md-icon>
-				<strong class="instruction-number">{{i + 1}}. </strong>
-				<md-input placeholder="instruction" class="full-width" [(ngModel)]="recipe.instructions[i]" (keypress)="checkingForEnter($event, i)" ></md-input>
+				<strong class="instruction-number">{{ins.id}}. </strong>
+				<!--<md-input placeholder="instruction" class="full-width" [(ngModel)]="ins.instruction" (keypress)="checkingForEnter($event, i)" ></md-input>-->
+				<app-autofocus-input [itemForInput]="ins.instruction" (onCompletion)="addInstruction()"></app-autofocus-input>
 			</md-list-item>
 		</md-list>
 

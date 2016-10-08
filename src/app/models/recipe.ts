@@ -29,6 +29,15 @@ export class Ingredient {
 export class Instruction {
     id: number;
     instruction: string;
+
+    constructor(newId: number) {
+        this.instruction = "";
+        this.id = newId;
+    }
+    // Instruction(newId: number) {
+    //     this.instruction = "";
+    //     this.id = newId;
+    // }
 }
 
 // ingredients: [{
