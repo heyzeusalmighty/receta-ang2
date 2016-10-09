@@ -4,15 +4,18 @@
 <button md-mini-fab (click)="addIngredient()">  
 	<i class="material-icons md-24">add</i>
 </button>
-<button md-mini-fab color="accent">
-	<i class="material-icons md-24">trash</i>
+<button md-mini-fab color="accent" (click)="deleteGroup()">
+	<i class="material-icons md-24">delete</i>
 </button>
 
 <md-list dense>
 	<md-list-item *ngFor="let ing of ingredientGroup.ingredients; let i = index; trackBy: custom">				
 		<md-icon md-list-avatar (click)="deleteIngredient(i)">delete</md-icon>
-		<!--<md-input placeholder="ingredient {{i + 1}}" [(ngModel)]="ing[i]" (keypress)="checkingForEnter($event, i)"></md-input>-->
-		<app-autofocus-input [itemForInput]="ing[i]" (onCompletion)="addIngredient()"></app-autofocus-input>
+			<!--<input type="text" [(ngModel)]="ingredientGroup.ingredients[i]" />-->
+		<app-autofocus-input 
+			[itemForInput]="ingredientGroup.ingredients[i]" 
+			[(ngModel)]="ingredientGroup.ingredients[i]" 
+			(onCompletion)="addIngredient()" ngDefaultControl>
+		</app-autofocus-input>
 	</md-list-item>
 </md-list>
-		

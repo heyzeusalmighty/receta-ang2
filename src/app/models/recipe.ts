@@ -5,10 +5,9 @@ export class Recipe {
     recipeName: string;
     description: string;
     servingSize: string;
-    //ingredients: [{ title: string; ingredients: string[];}];
     ingredients: Ingredient[];
     instructions: Instruction[];
-    tags: number[];
+    tags: string[];
     imageUrl: string;
     source: string;
     sourceUrl: string;
@@ -34,18 +33,5 @@ export class Instruction {
         this.instruction = "";
         this.id = newId;
     }
-    // Instruction(newId: number) {
-    //     this.instruction = "";
-    //     this.id = newId;
-    // }
 }
-
-// ingredients: [{
-//         title : String,
-//         ingredients: [String]
-//     }],
-//     instructions: [{
-//         id: Number,
-//         instruction: String
-//     }],
 

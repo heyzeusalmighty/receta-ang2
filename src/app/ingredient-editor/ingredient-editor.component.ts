@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, Renderer, ViewChild, EventEmitter } from '@angular/core';
 import { Ingredient } from '../models/recipe';
 
 @Component({
@@ -8,13 +8,13 @@ import { Ingredient } from '../models/recipe';
 })
 export class IngredientEditorComponent implements OnInit {
   @Input() ingredientGroup : Ingredient;
+  @Output() onDeletion = new EventEmitter();
   @ViewChild('groupName') titleInputElement;
 
 
   constructor(public renderer: Renderer) { }
 
   ngOnInit() {
-    console.log('initiated => ', this.ingredientGroup);
     if(!this.ingredientGroup.title) {
       this.ingredientGroup.title = "";
     }
@@ -36,6 +36,10 @@ export class IngredientEditorComponent implements OnInit {
 
   deleteIngredient(index): void {
    	this.ingredientGroup.ingredients.splice(index, 1);
+  }
+
+  deleteGroup() : void {
+    this.onDeletion.emit();
   }
 
   	checkingForEnter(event, index): void {

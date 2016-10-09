@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, Renderer, ViewChild, EventEmitter } f
 @Component({
   selector: 'app-autofocus-input',
   template: `
-        <md-input #autoInput placeholder="yes dummy" [(ngModel)]="itemForInput" (keypress)="checkingForEnter($event, i)"></md-input>`,
+        <md-input #autoInput placeholder="Ingredient" [(ngModel)]="itemForInput" (keypress)="checkingForEnter($event, i)"></md-input>`,
   //styleUrls: ['./autofocus-input.component.css']
 })
 export class AutofocusInputComponent implements OnInit {

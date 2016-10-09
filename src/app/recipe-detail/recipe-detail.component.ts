@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ContentChildren, QueryList } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 import { MdInputModule } from '@angular2-material/input';
 import { Recipe, Ingredient, Instruction } from '../models/recipe';
+import { RecipeTag } from '../models/tag';
 import { RecipeService } from '../recipe.service';
 
 
@@ -14,6 +16,9 @@ import { RecipeService } from '../recipe.service';
 export class RecipeDetailComponent implements OnInit {
 	@Input() recipe: Recipe;
 	@ContentChildren(MdInputModule) inputs: QueryList<MdInputModule>;
+	tags: RecipeTag[];
+	recipeStore : Observable<any>;
+
 
 
 	constructor(
@@ -30,9 +35,24 @@ export class RecipeDetailComponent implements OnInit {
 				if(id.length > 0) { 
 					this.recipeService.getRecipeObservable(id)
 						.subscribe(
-							recipe => this.recipe = recipe,
+							recipe => {
+								this.recipe = recipe;
+								this.recipeStore = this.recipeService.getRecipeStoreObservable();
+								this.recipeStore.subscribe(
+									data => { 
+										this.tags = data.tags;
+										this.tags.forEach((tag) => {
+											recipe.tags.forEach((recTag) => {
+												if(recTag === tag.name) {
+													tag.selected = true;
+												}
+											})
+										})
+								});
+							},
 							err =>  console.log(err)
 						);
+					
 				}
 			});
 		} else {
@@ -75,6 +95,22 @@ export class RecipeDetailComponent implements OnInit {
 		this.recipe.instructions.splice(index, 1);
 	}
 
+	toggleTag(tag : RecipeTag):void {
+		if(tag.selected) {
+			this.recipe.tags.forEach((recTag, idx) => {
+				if(recTag == tag.name) {
+					this.recipe.tags.splice(idx, 1);
+					tag.selected = false;
+				}
+			})
+		} else {
+			this.recipe.tags.push(tag.name);
+			tag.selected = true;
+		}
+		// console.log('tag ', tag)
+		// tag.selected = !tag.selected;
+	}
+
 	checkingForEnter(event, index): void {
 		//keycode of the enter key is 13 btw
 		if(event.keyCode === 13) {
@@ -114,6 +150,9 @@ export class RecipeDetailComponent implements OnInit {
 			// );		
 	}
 
+	deleteIngredientGroup(index :number): void {
+		this.recipe.ingredients.splice(index, 1);
+	}
 
 
 

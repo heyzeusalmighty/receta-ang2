@@ -12,12 +12,29 @@
 
 		<md-input placeholder="Serving Size" [(ngModel)]="recipe.servingSize" class="full-width"></md-input>
 
+		<!-- TAGS -->
+		<div>
+			<div><strong>TAGS</strong></div>
+
+			<span *ngFor="let tag of tags" class="tag-button">
+				<button md-raised-button color="primary" *ngIf="tag.selected" (click)="toggleTag(tag)">{{ tag.name }}</button>
+				<button md-button *ngIf="!tag.selected" (click)="toggleTag(tag)">{{ tag.name }}</button>
+			</span>
+
+
+
+			<!--<button md-raised-button *ngFor="let tag of tags" 
+				class="tag-button" 
+				[disabled]="!tag.selected"
+				(click)="toggleTag(tag)">{{tag.name}}</button>-->
+		</div>
+		<hr />
 
 		<!-- INGREDIENTS -->
 		<button md-raised-button (click)="addIngredient()" class="ing-button">Add Ingredients</button>
 		<br />
 
-		<ingredient-editor *ngFor="let ing of recipe.ingredients" [ingredientGroup]="ing" ></ingredient-editor>
+		<ingredient-editor *ngFor="let ing of recipe.ingredients; let i = index;" [ingredientGroup]="ing" (onDeletion)="deleteIngredientGroup(i)" ></ingredient-editor>
 
 		<hr />
 		<!-- INSTRUCTIONS -->
@@ -28,9 +45,11 @@
 				<md-icon md-list-avatar (click)="deleteInstruction(i)">delete</md-icon>
 				<strong class="instruction-number">{{ins.id}}. </strong>
 				<!--<md-input placeholder="instruction" class="full-width" [(ngModel)]="ins.instruction" (keypress)="checkingForEnter($event, i)" ></md-input>-->
-				<app-autofocus-input [itemForInput]="ins.instruction" (onCompletion)="addInstruction()"></app-autofocus-input>
+				<app-autofocus-input [(ngModel)]="ins.instruction" [itemForInput]="ins.instruction" (onCompletion)="addInstruction()" ngDefaultControl></app-autofocus-input>
 			</md-list-item>
 		</md-list>
+
+		
 
 		<button md-raised-button type="button" (click)="updateRecipe()">SAVE</button>
 
@@ -40,13 +59,6 @@
 		
 
 <br />
-
-
-<!--
-    ingredients: string[];
-    instructions: string[];
-    tags: number[];
--->
 
 
 	<button (click)="goBack()">Back</button>
