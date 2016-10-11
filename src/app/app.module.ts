@@ -25,6 +25,7 @@ import { AddNewTagComponent } from './add-new-tag/add-new-tag.component';
 import { TagInputComponent } from './tag-input/tag-input.component';
 import { IngredientEditorComponent } from './ingredient-editor/ingredient-editor.component';
 import { AutofocusInputComponent } from './autofocus-input/autofocus-input.component';
+import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AutofocusInputComponent } from './autofocus-input/autofocus-input.compo
     AddNewTagComponent,
     TagInputComponent,
     IngredientEditorComponent,
-    AutofocusInputComponent
+    AutofocusInputComponent,
+    RecipeSearchComponent
   ],
   imports: [
     BrowserModule,

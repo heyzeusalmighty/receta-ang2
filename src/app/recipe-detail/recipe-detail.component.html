@@ -45,7 +45,11 @@
 				<md-icon md-list-avatar (click)="deleteInstruction(i)">delete</md-icon>
 				<strong class="instruction-number">{{ins.id}}. </strong>
 				<!--<md-input placeholder="instruction" class="full-width" [(ngModel)]="ins.instruction" (keypress)="checkingForEnter($event, i)" ></md-input>-->
-				<app-autofocus-input [(ngModel)]="ins.instruction" [itemForInput]="ins.instruction" (onCompletion)="addInstruction()" ngDefaultControl></app-autofocus-input>
+				<app-autofocus-input [(ngModel)]="ins.instruction" 
+					[placeholderText]="'Instruction'"
+					[itemForInput]="ins.instruction" 
+					(onCompletion)="addInstruction()" ngDefaultControl>
+				</app-autofocus-input>
 			</md-list-item>
 		</md-list>
 

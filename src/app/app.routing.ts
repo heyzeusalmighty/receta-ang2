@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/recipes',
         pathMatch: 'full'
     }
 ]

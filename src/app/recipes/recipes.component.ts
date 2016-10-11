@@ -20,6 +20,8 @@ export class RecipesComponent implements OnInit {
 	recipeStore : Observable<any>;
   recipeModels : Observable<any[]>;
 	tags: RecipeTag[];
+	searchString : string;
+	searchingFlag : boolean = false;
   
 
   constructor(private router: Router, private recipeService: RecipeService) { }
@@ -56,6 +58,10 @@ export class RecipesComponent implements OnInit {
 
 	filterByTag(tag: RecipeTag): void {
 		console.log(' filtering by ', tag.name);
+	}
+
+	search() : void {
+
 	}
 
 

@@ -2,14 +2,17 @@ import { Component, OnInit, Input, Output, Renderer, ViewChild, EventEmitter } f
 
 @Component({
   selector: 'app-autofocus-input',
+  //host: { '[placeholder]': 'placeholderText'},
   template: `
-        <md-input #autoInput placeholder="Ingredient" [(ngModel)]="itemForInput" (keypress)="checkingForEnter($event, i)"></md-input>`,
+        <md-input #autoInput placeholder="{{placeholderText}}" [(ngModel)]="itemForInput" (keypress)="checkingForEnter($event, i)" (blur)="elementBlur()"></md-input>`,
   //styleUrls: ['./autofocus-input.component.css']
 })
 export class AutofocusInputComponent implements OnInit {
 
   @Input() itemForInput : string;
+  @Input() placeholderText : string;
   @Output() onCompletion = new EventEmitter();
+  @Output() onBlur = new EventEmitter();
   @ViewChild('autoInput') inputElementRef;
 
 
@@ -18,7 +21,7 @@ export class AutofocusInputComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
+	ngAfterViewInit() {
 		setTimeout(() => {
 			this.renderer.invokeElementMethod(this.inputElementRef._inputElement.nativeElement, 'focus', [])
 		}, 0);
@@ -30,6 +33,10 @@ export class AutofocusInputComponent implements OnInit {
             //this.addThisTag();
                   this.onCompletion.emit();
 		}
+	}
+
+	elementBlur() : void {
+		this.onBlur.emit();
 	}
 
 

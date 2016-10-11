@@ -14,6 +14,7 @@
 			<!--<input type="text" [(ngModel)]="ingredientGroup.ingredients[i]" />-->
 		<app-autofocus-input 
 			[itemForInput]="ingredientGroup.ingredients[i]" 
+			[placeholderText]="'Ingredient'"
 			[(ngModel)]="ingredientGroup.ingredients[i]" 
 			(onCompletion)="addIngredient()" ngDefaultControl>
 		</app-autofocus-input>

@@ -1,0 +1,17 @@
+
+
+
+<button md-mini-fab (click)="searchingFlag = true" *ngIf="!searchingFlag">
+	<i class="material-icons md-24">search</i>
+</button>
+
+
+<app-autofocus-input 
+	*ngIf="searchingFlag"
+	[itemForInput]="searchString" 
+	[placeholderText]="'SEARCH'"
+	[(ngModel)]="searchString" 
+	(onCompletion)="query()"
+	(onBlur)="checkBlur()"	
+	 ngDefaultControl>
+</app-autofocus-input>
