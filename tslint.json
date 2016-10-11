@@ -5,15 +5,14 @@
   "rules": {
     "class-name": true,
     "comment-format": [
-      true,
-      "check-space"
+      true      
     ],
     "curly": true,
     "eofline": true,
     "forin": true,
     "indent": [
       true,
-      "spaces"
+      "tabs"
     ],
     "label-position": true,
     "label-undefined": true,
@@ -47,7 +46,7 @@
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-unused-expression": true,
     "no-unused-variable": true,
     "no-unreachable": true,
@@ -73,20 +72,19 @@
       true,
       "allow-null-check"
     ],
-    "typedef-whitespace": [
-      true,
-      {
-        "call-signature": "nospace",
-        "index-signature": "nospace",
-        "parameter": "nospace",
-        "property-declaration": "nospace",
-        "variable-declaration": "nospace"
-      }
-    ],
+    // "typedef-whitespace": [
+    //   true,
+    //   {
+    //     "call-signature": "space",
+    //     "index-signature": "space",
+    //     "parameter": "space",
+    //     "property-declaration": "space",
+    //     "variable-declaration": "space"
+    //   }
+    // ],
     "variable-name": false,
     "whitespace": [
-      true,
-      "check-branch",
+      true,     
       "check-decl",
       "check-operator",
       "check-separator",

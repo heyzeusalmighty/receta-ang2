@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Recipe } from './models/recipe';
-import { RECIPES } from './models/mock-recipes';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -33,11 +32,11 @@ export class RecipeService {
 	getRecipes() {
 		this.madeRecipeCall = true;
 		return this.http.get(this.recipesUrl)
-			.map((res:Response) => res.json())
+			.map((res: Response) => res.json())
 			.subscribe( 
 				data => this.store.dispatch({ type: ADD_RECIPE, payload: data}),
 				error => console.log('errror ' + error)
-			)
+			);
 	}
 
 	getRecipeStoreObservable() {
@@ -51,7 +50,7 @@ export class RecipeService {
 			.subscribe(
 				data => this.store.dispatch({ type: ADD_TAG, payload: data}),
 				error => console.log('err => ', error)
-			)
+			);
 	}
 
 	// OBSERVABLE VERSIONS
@@ -68,18 +67,18 @@ export class RecipeService {
 
 	getRecipeObservable(id: string): Observable<Recipe> {		
 		return this.http.get(`${this.recipesUrl}/${id}`)
-						.map((res: Response) => res.json())
-						.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+			.map((res: Response) => res.json())
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	}
 
 	addRecipe (body: Object): Observable<Recipe[]> {
-				let bodyString 	= JSON.stringify(body); // Stringify payload        
-				let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-				let options		= new RequestOptions({ headers: headers }); // Create a request option
+		let bodyString 	= JSON.stringify(body); // Stringify payload        
+		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+		let options		= new RequestOptions({ headers: headers }); // Create a request option
 
-				return this.http.post(this.recipesUrl, body, options) // ...using post request
-												 .map((res:Response) => res) // ...and calling .json() on the response to return data
-												 .catch((error:any) => Observable.throw(error || 'Server error')); //...errors if any
+		return this.http.post(this.recipesUrl, body, options) // ...using post request
+			.map((res: Response) => res) // ...and calling .json() on the response to return data
+			.catch((error: any) => Observable.throw(error || 'Server error')); //...errors if any
 	}
 
 	addRecipeToStore(body: Object) {
@@ -88,18 +87,18 @@ export class RecipeService {
 		let options		= new RequestOptions({ headers: headers }); // Create a request option
 
 		return this.http.post(this.recipesUrl, body, options) // ...using post request
-				.map((res:Response) => res)
-				.subscribe( 
-					data => this.store.dispatch({ type: ADD_RECIPE, payload: data}),
-					error => console.log('errror ' + error)
-				)
+			.map((res: Response) => res)
+			.subscribe( 
+				data => this.store.dispatch({ type: ADD_RECIPE, payload: data}),
+				error => console.log('errror ' + error)
+			);
 	}
 	
-	// Delete a comment
-	removeRecipe (id:string): Observable<String> {
-			return this.http.delete(`${this.recipesUrl}/${id}`)
-												.map((res:Response) => res.json()) 
-												.catch((error:any) => Observable.throw(error || 'Server error')); 
+	// Delete a recipe
+	removeRecipe (id : string) : Observable<String> {
+		return this.http.delete(`${this.recipesUrl}/${id}`)
+			.map((res: Response) => res.json()) 
+			.catch((error: any) => Observable.throw(error || 'Server error')); 
 	}
 
 	addTag(tagName: string) {
@@ -109,11 +108,11 @@ export class RecipeService {
 
 
 		return this.http.post(this.tagsUrl, bodyString, options )
-				.map((res:Response) => res.json())
-				.subscribe(
-					data => this.store.dispatch({ type: ADD_TAG, payload: data}),
-					error => console.error('error :: ', error)
-				)
+			.map((res: Response) => res.json())
+			.subscribe(
+				data => this.store.dispatch({ type: ADD_TAG, payload: data}),
+				error => console.error('error :: ', error)
+			);
 	}      
 
 
