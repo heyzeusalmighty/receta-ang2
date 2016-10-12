@@ -32,26 +32,46 @@ export class RecipeDetailComponent implements OnInit {
 		if(urlPath !== 'new') {
 			this.route.params.forEach((params: Params) => {
 				let id = params['id'];
-				if(id.length > 0) { 
-					this.recipeService.getRecipeObservable(id)
-						.subscribe(
-							recipe => {
-								this.recipe = recipe;
-								this.recipeStore = this.recipeService.getRecipeStoreObservable();
-								this.recipeStore.subscribe(
-									data => { 
-										this.tags = data.tags;
-										this.tags.forEach((tag) => {
-											recipe.tags.forEach((recTag) => {
-												if(recTag === tag.name) {
-													tag.selected = true;
-												}
-											})
-										})
+				if(id.length > 0) {
+
+					//this.recipe = this.recipeService.getRecipeObservable(id);
+					this.recipeStore = this.recipeService.getRecipeStoreObservable();
+					this.recipeStore.subscribe(
+						data => {
+							this.recipe = data.recipes.filter(recs => {
+								return recs._id === id;
+							})[0];
+
+							this.tags = data.tags;
+							this.tags.forEach((tag) => {
+								this.recipe.tags.forEach(recTag => {
+									if(recTag === tag.name) {
+										tag.selected = true;
+									}
 								});
-							},
-							err =>  console.log(err)
-						);
+							});
+						}
+					);
+
+					// this.recipeService.getRecipeObservable(id)
+					// 	.subscribe(
+					// 		recipe => {
+					// 			this.recipe = recipe;
+					// 			this.recipeStore = this.recipeService.getRecipeStoreObservable();
+					// 			this.recipeStore.subscribe(
+					// 				data => { 
+					// 					this.tags = data.tags;
+					// 					this.tags.forEach((tag) => {
+					// 						recipe.tags.forEach((recTag) => {
+					// 							if(recTag === tag.name) {
+					// 								tag.selected = true;
+					// 							}
+					// 						})
+					// 					})
+					// 			});
+					// 		},
+					// 		err =>  console.log(err)
+					// 	);
 					
 				}
 			});

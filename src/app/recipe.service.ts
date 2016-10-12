@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ADD_RECIPE, ADD_TAG } from './reducers/recipe.reducer';
+import { ADD_RECIPE, GET_RECIPE } from './reducers/recipe.reducer';
+import { ADD_TAG } from './reducers/tag.reducer';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -24,8 +25,10 @@ export class RecipeService {
 	madeTagCall: boolean = false;
 
 	constructor (private http: Http, private store: Store<any>) {
-		this.recipeStore = store.select('recipe');
-		this.recipeStore.subscribe( data => this.recipes = data.recipes );		
+		this.recipeStore = store.select('recipe');		
+		this.recipeStore.subscribe( data => this.recipes = data.recipes );
+		this.tagStore = store.select('tag');
+		this.tagStore.subscribe(data => this.tags = data.tags);		
 	}
 
 
@@ -61,15 +64,23 @@ export class RecipeService {
 	// 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	// }
 
-	// getRecipeObservable(id: string) {
+	getRecipeObservable(id: string) {		
+		
+		return this.recipes.filter(recs => {
+			return recs._id === id;
+		})[0];
+		//return this.store.dispatch({ type: GET_RECIPE, payload: id });
+	}
 
+	// getRecipe(id: string) {
+	// 	return this.recipeStore
 	// }
 
-	getRecipeObservable(id: string): Observable<Recipe> {		
-		return this.http.get(`${this.recipesUrl}/${id}`)
-			.map((res: Response) => res.json())
-			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-	}
+	// getRecipeObservable(id: string): Observable<Recipe> {		
+	// 	return this.http.get(`${this.recipesUrl}/${id}`)
+	// 		.map((res: Response) => res.json())
+	// 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	// }
 
 	addRecipe (body: Object): Observable<Recipe[]> {
 		let bodyString 	= JSON.stringify(body); // Stringify payload        

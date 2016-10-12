@@ -9,22 +9,22 @@ import { RecipeTag } from '../models/tag';
 import { AppState } from '../models/appstate';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: 'recipes.component.html',
-  styleUrls: ['recipes.component.css']
+	selector: 'app-recipes',
+	templateUrl: 'recipes.component.html',
+	styleUrls: ['recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
 
-  recentRecipes: Recipe[];
-  selectedRecipe: Recipe;
+	recentRecipes: Recipe[];
+	selectedRecipe: Recipe;
 	recipeStore : Observable<any>;
-  recipeModels : Observable<any[]>;
+	recipeModels : Observable<any[]>;
 	tags: RecipeTag[];
 	searchString : string;
 	searchingFlag : boolean = false;
   
 
-  constructor(private router: Router, private recipeService: RecipeService) { }
+	constructor(private router: Router, private recipeService: RecipeService) { }
 
 	ngOnInit() {
 		this.getRecipes();

@@ -13,7 +13,7 @@ export class RecipeViewComponent implements OnInit {
 	
 	@Input() recipe: Recipe;
 	deleting: boolean = false;
-	response: String = "";
+	response: String = '';
 
 
 	constructor(
@@ -25,17 +25,14 @@ export class RecipeViewComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.forEach((params: Params) => {
 			let id = params['id'];
-			this.recipeService.getRecipeObservable(id)
-				.subscribe(recipe => this.recipe = recipe,
-				err => console.log(err)
-			);
+			this.recipe = this.recipeService.getRecipeObservable(id);
 		});
 	}
 
 	editRecipe(): void {
 		console.log('gonna edit this recipe please');
 		let link = ['/detail', this.recipe._id];
-    	this.router.navigate(link);
+		this.router.navigate(link);
 	}
 
 	deleteRecipe(): void {
@@ -48,7 +45,7 @@ export class RecipeViewComponent implements OnInit {
 		);
 
 		//go back to recipes page		
-		this.router.navigate(["/recipes"]);
+		this.router.navigate(['/recipes']);
 	}
 
 

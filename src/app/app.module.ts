@@ -19,8 +19,8 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
-import { counterReducer } from './reducers/counter';
 import { recipeReducer } from './reducers/recipe.reducer';
+import { tagReducer } from './reducers/tag.reducer'; 
 import { AddNewTagComponent } from './add-new-tag/add-new-tag.component';
 import { TagInputComponent } from './tag-input/tag-input.component';
 import { IngredientEditorComponent } from './ingredient-editor/ingredient-editor.component';
@@ -28,39 +28,42 @@ import { AutofocusInputComponent } from './autofocus-input/autofocus-input.compo
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 
 
+const appReducers: any = {
+	recipe: recipeReducer,
+	tag: tagReducer
+};
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    RecipeDetailComponent,
-    DashboardComponent,
-    RecipesComponent,
-    RecipeViewComponent,
-    AddNewTagComponent,
-    TagInputComponent,
-    IngredientEditorComponent,
-    AutofocusInputComponent,
-    RecipeSearchComponent
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    routing,
-    MdButtonModule.forRoot(),
-    MdCardModule.forRoot(),
-    MdMenuModule.forRoot(),
-    MdToolbarModule.forRoot(),
-    MdIconModule.forRoot(),
-    MdSidenavModule.forRoot(),
-    MdInputModule.forRoot(),
-    MdListModule.forRoot(),
-    StoreModule.provideStore({ counter: counterReducer }, { counter: 0 }),
-    StoreModule.provideStore({ recipe: recipeReducer}),
-    //StoreModule.provideStore({ tag: tagReducer })
-  ],
-  providers: [],
-  entryComponents: [AppComponent],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		RecipeDetailComponent,
+		DashboardComponent,
+		RecipesComponent,
+		RecipeViewComponent,
+		AddNewTagComponent,
+		TagInputComponent,
+		IngredientEditorComponent,
+		AutofocusInputComponent,
+		RecipeSearchComponent
+	],
+	imports: [
+		BrowserModule,
+		CommonModule,
+		FormsModule,
+		routing,
+		MdButtonModule.forRoot(),
+		MdCardModule.forRoot(),
+		MdMenuModule.forRoot(),
+		MdToolbarModule.forRoot(),
+		MdIconModule.forRoot(),
+		MdSidenavModule.forRoot(),
+		MdInputModule.forRoot(),
+		MdListModule.forRoot(),
+		StoreModule.provideStore(appReducers)
+	],
+	providers: [],
+	entryComponents: [AppComponent],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
 

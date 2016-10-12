@@ -10,10 +10,10 @@ import * as _ from 'lodash';
 export const ADD_RECIPE: string = 'ADD_RECIPE';
 export const UPDATE_RECIPE: string = 'UPDATE_RECIPE';
 export const DELETE_RECIPE: string = 'DELETE_RECIPE';
-export const ADD_TAG: string = 'ADD_TAG';
-export const UPDATE_TAG: string = 'UPDATE_TAG';
-export const DELETE_TAG: string = 'DELETE_TAG';
-export const RESET: string = 'RESET';
+// export const ADD_TAG: string = 'ADD_TAG';
+// export const UPDATE_TAG: string = 'UPDATE_TAG';
+// export const DELETE_TAG: string = 'DELETE_TAG';
+export const GET_RECIPE = 'GET_RECIPE';
 
 let initialState = new RecipesStoreModel();
 // let dummyTag = new RecipeTag();
@@ -40,14 +40,15 @@ export const recipeReducer: ActionReducer<RecipesStoreModel> = (state = initialS
 			return state;
 
 		case DELETE_RECIPE:
+			return state;		
+
+		case GET_RECIPE:
+			state.selectedRecipe = state.recipes.filter(rec => {
+				return rec._id === action.payload._id;
+			})[0];
 			return state;
 
-		case ADD_TAG:
-			let newVersion = state.tags.concat(action.payload);
-			return Object.assign({}, state, { tags: newVersion });
-
-		case RESET:
-			return state;
+			
 
 		default:
 			return state;
