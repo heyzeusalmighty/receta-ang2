@@ -11,14 +11,16 @@ export const UPDATE_TAG: string = 'UPDATE_TAG';
 export const DELETE_TAG: string = 'DELETE_TAG';
 
 let initialState = new RecipesStoreModel();
-// let dummyTag = new RecipeTag();
-// dummyTag._id = 'whoa what is that';
-// dummyTag.name = 'Desert';
-// initialState.tags.push(dummyTag);
+
 
 
 export const tagReducer: ActionReducer<RecipesStoreModel> = (state = initialState, action: Action) => {
 	switch (action.type) {
+
+		case ADD_TAG:
+			let newVersion = state.tags.concat(action.payload);
+			return Object.assign({}, state, { tags: newVersion });
+
 		// case ADD_RECIPE:
 		// 	let x = state.recipes.concat(action.payload);
 		// 	return Object.assign({}, state, { recipes: x});
@@ -36,11 +38,7 @@ export const tagReducer: ActionReducer<RecipesStoreModel> = (state = initialStat
 
 		// case DELETE_RECIPE:
 		// 	return state;
-
-		case ADD_TAG:
-			let newVersion = state.tags.concat(action.payload);
-			return Object.assign({}, state, { tags: newVersion });
-
+		
 		// case GET_RECIPE:
 		// 	state.selectedRecipe = state.recipes.filter(rec => {
 		// 		return rec._id === action.payload._id;

@@ -4,7 +4,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
 
-import { RecipeService } from './recipe.service';
+import { RecipeService } from './services/recipe.service';
 
 @Component({
   selector: 'app-root',

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { MdInputModule } from '@angular2-material/input';
 import { Recipe, Ingredient, Instruction } from '../models/recipe';
 import { RecipeTag } from '../models/tag';
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../services/recipe.service';
 
 
 @Component({

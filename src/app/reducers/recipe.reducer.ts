@@ -16,10 +16,6 @@ export const DELETE_RECIPE: string = 'DELETE_RECIPE';
 export const GET_RECIPE = 'GET_RECIPE';
 
 let initialState = new RecipesStoreModel();
-// let dummyTag = new RecipeTag();
-// dummyTag._id = 'whoa what is that';
-// dummyTag.name = 'Desert';
-// initialState.tags.push(dummyTag);
 
 
 export const recipeReducer: ActionReducer<RecipesStoreModel> = (state = initialState, action: Action) => {

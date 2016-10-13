@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-import { Recipe } from './models/recipe';
+import { Recipe } from '../models/recipe';
+import { RecipesStoreModel } from '../models/recipeStoreModel';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ADD_RECIPE, GET_RECIPE } from './reducers/recipe.reducer';
-import { ADD_TAG } from './reducers/tag.reducer';
+import { ADD_RECIPE, GET_RECIPE } from '../reducers/recipe.reducer';
+import { ADD_TAG } from '../reducers/tag.reducer';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -24,11 +25,16 @@ export class RecipeService {
 	madeRecipeCall: boolean = false;
 	madeTagCall: boolean = false;
 
-	constructor (private http: Http, private store: Store<any>) {
+	//secondary attempt at this whole ordeal
+	recipeStoreModel: Store<RecipesStoreModel>;
+
+	constructor (private http: Http, private store: Store<RecipesStoreModel>) {
 		this.recipeStore = store.select('recipe');		
 		this.recipeStore.subscribe( data => this.recipes = data.recipes );
 		this.tagStore = store.select('tag');
-		this.tagStore.subscribe(data => this.tags = data.tags);		
+		this.tagStore.subscribe(data => this.tags = data.tags);
+
+		this.recipeStoreModel = store;		
 	}
 
 
@@ -58,11 +64,13 @@ export class RecipeService {
 
 	// OBSERVABLE VERSIONS
 
-	// getRecipesObservable() : Observable<Recipe[]> {
-	// 	return this.http.get(this.recipesUrl)
-	// 		.map((res:Response) => res.json())      
-	// 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-	// }
+	getRecipesObservable()  {
+	//getRecipesObservable() : Observable<Recipe[]> {
+		return this.recipeStoreModel.select<Recipe[]>('recipe');
+		// return this.http.get(this.recipesUrl)
+		// 	.map((res:Response) => res.json())      
+		// 	.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
 
 	getRecipeObservable(id: string) {		
 		

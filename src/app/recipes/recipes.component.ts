@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../services/recipe.service';
 import { Recipe } from '../models/recipe';
 import { RecipeTag } from '../models/tag';
+import { RecipesStoreModel } from '../models/recipeStoreModel';
 import { AppState } from '../models/appstate';
 
 @Component({
@@ -22,9 +23,17 @@ export class RecipesComponent implements OnInit {
 	tags: RecipeTag[];
 	searchString : string;
 	searchingFlag : boolean = false;
+
+	$recipeModel: Observable<RecipesStoreModel>;
+	$recipes: Observable<Recipe[]>;	
+	//$recipes: 
+
   
 
-	constructor(private router: Router, private recipeService: RecipeService) { }
+	constructor(private router: Router, private recipeService: RecipeService) {
+		this.$recipeModel = this.recipeService.getRecipesObservable();
+
+	}
 
 	ngOnInit() {
 		this.getRecipes();
