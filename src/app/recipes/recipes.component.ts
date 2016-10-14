@@ -31,7 +31,7 @@ export class RecipesComponent implements OnInit {
   
 
 	constructor(private router: Router, private recipeService: RecipeService) {
-		this.$recipeModel = this.recipeService.getRecipesObservable();
+		this.$recipes = this.recipeService.getRecipesObservable();
 
 	}
 

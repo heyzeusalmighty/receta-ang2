@@ -11,6 +11,7 @@ import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
 import { Store, StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { TagInputComponent } from './tag-input/tag-input.component';
 import { IngredientEditorComponent } from './ingredient-editor/ingredient-editor.component';
 import { AutofocusInputComponent } from './autofocus-input/autofocus-input.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeEffectsService } from './services/recipe-effects.service';
 
 
 const appReducers: any = {
@@ -59,7 +61,8 @@ const appReducers: any = {
 		MdSidenavModule.forRoot(),
 		MdInputModule.forRoot(),
 		MdListModule.forRoot(),
-		StoreModule.provideStore(appReducers)
+		StoreModule.provideStore(appReducers),
+		EffectsModule.run(RecipeEffectsService)
 	],
 	providers: [],
 	entryComponents: [AppComponent],
