@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ADD_RECIPE, GET_RECIPE } from '../reducers/recipe.reducer';
-import { ADD_TAG } from '../reducers/tag.reducer';
+import { ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE } from '../reducers/recipe.reducer';
+import { ADD_TAG, LOAD_TAGS } from '../reducers/tag.reducer';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -22,102 +22,50 @@ export class RecipeService {
 	recipes: Array<any>;
 	tags: Array<any>;
 	selectedRecipe: Recipe;
-	madeRecipeCall: boolean = false;
-	madeTagCall: boolean = false;
-
-	//secondary attempt at this whole ordeal
-	recipeStoreModel: Store<RecipesStoreModel>;
 
 	constructor (private http: Http, private store: Store<RecipesStoreModel>) {
-		this.recipeStore = store.select('recipe');		
-		this.recipeStore.subscribe( data => this.recipes = data.recipes );
-		this.tagStore = store.select('tag');
-		this.tagStore.subscribe(data => this.tags = data.tags);
+		this.recipeStore = store.select('recipe');
+		this.recipeStore.subscribe(data => this.recipes = data.recipes);
 
-		this.recipeStoreModel = store;		
+		this.tagStore = store.select('tag');
+
+		this.getRecipes();
+		this.getTags();
 	}
 
 
 	getRecipes() {
-		this.madeRecipeCall = true;
-		return this.http.get(this.recipesUrl)
-			.map((res: Response) => res.json())
-			.subscribe( 
-				data => this.store.dispatch({ type: ADD_RECIPE, payload: data}),
-				error => console.log('errror ' + error)
-			);
+		console.log('hi we are getRecipes');
+		this.store.dispatch({ type: LOAD_RECIPES});		
 	}
 
-	getRecipeStoreObservable() {
+	getRecipeStoreObservable() : Observable<any> {
 		return this.recipeStore;
 	}
 
-	getTags() {
-		this.madeTagCall = true;
-		return this.http.get(this.tagsUrl)
-			.map((res: Response) => res.json())
-			.subscribe(
-				data => this.store.dispatch({ type: ADD_TAG, payload: data}),
-				error => console.log('err => ', error)
-			);
+	getTagStoreObservable() {
+		return this.tagStore;
 	}
 
-	// OBSERVABLE VERSIONS
-
-	getRecipesObservable()  {
-	//getRecipesObservable() : Observable<Recipe[]> {
-		return this.recipeStoreModel.select<Recipe[]>('recipe');
-		// return this.http.get(this.recipesUrl)
-		// 	.map((res:Response) => res.json())      
-		// 	.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	getTags() {
+		this.store.dispatch({ type: LOAD_TAGS});		
 	}
 
 	getRecipeObservable(id: string) {		
-		
+		console.log('oh hi, getting recipe');
 		return this.recipes.filter(recs => {
-			return recs._id === id;
+				return recs._id === id;
 		})[0];
-		//return this.store.dispatch({ type: GET_RECIPE, payload: id });
 	}
 
-	// getRecipe(id: string) {
-	// 	return this.recipeStore
-	// }
-
-	// getRecipeObservable(id: string): Observable<Recipe> {		
-	// 	return this.http.get(`${this.recipesUrl}/${id}`)
-	// 		.map((res: Response) => res.json())
-	// 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-	// }
-
-	addRecipe (body: Object): Observable<Recipe[]> {
-		let bodyString 	= JSON.stringify(body); // Stringify payload        
-		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-		let options		= new RequestOptions({ headers: headers }); // Create a request option
-
-		return this.http.post(this.recipesUrl, body, options) // ...using post request
-			.map((res: Response) => res) // ...and calling .json() on the response to return data
-			.catch((error: any) => Observable.throw(error || 'Server error')); //...errors if any
-	}
-
-	addRecipeToStore(body: Object) {
-		let bodyString 	= JSON.stringify(body); // Stringify payload        
-		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-		let options		= new RequestOptions({ headers: headers }); // Create a request option
-
-		return this.http.post(this.recipesUrl, body, options) // ...using post request
-			.map((res: Response) => res)
-			.subscribe( 
-				data => this.store.dispatch({ type: ADD_RECIPE, payload: data}),
-				error => console.log('errror ' + error)
-			);
+	// add recipe to store
+	addRecipeToStore(body: Object) { 
+		this.store.dispatch({ type: ADD_RECIPE, payload: body});		
 	}
 	
 	// Delete a recipe
-	removeRecipe (id : string) : Observable<String> {
-		return this.http.delete(`${this.recipesUrl}/${id}`)
-			.map((res: Response) => res.json()) 
-			.catch((error: any) => Observable.throw(error || 'Server error')); 
+	removeRecipe (id : string) : void {
+		this.store.dispatch({ type: DELETE_RECIPE, payload: id}); 
 	}
 
 	addTag(tagName: string) {

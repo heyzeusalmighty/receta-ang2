@@ -50,7 +50,7 @@ router.delete('/:id', (req, res) => {
     let query = { '_id' : req.params.id };
     Recipe.remove(query, (err) => {
         if (err) return console.log(err);
-        res.send('success')
+        res.send(recipeId)
     })
 
 })

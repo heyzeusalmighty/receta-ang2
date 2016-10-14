@@ -18,6 +18,7 @@ export class RecipeDetailComponent implements OnInit {
 	@ContentChildren(MdInputModule) inputs: QueryList<MdInputModule>;
 	tags: RecipeTag[];
 	recipeStore : Observable<any>;
+	tagStore: Observable<any>;
 
 
 
@@ -40,39 +41,19 @@ export class RecipeDetailComponent implements OnInit {
 						data => {
 							this.recipe = data.recipes.filter(recs => {
 								return recs._id === id;
-							})[0];
-
-							this.tags = data.tags;
-							this.tags.forEach((tag) => {
-								this.recipe.tags.forEach(recTag => {
-									if(recTag === tag.name) {
-										tag.selected = true;
-									}
-								});
-							});
+							})[0];							
 						}
 					);
 
-					// this.recipeService.getRecipeObservable(id)
-					// 	.subscribe(
-					// 		recipe => {
-					// 			this.recipe = recipe;
-					// 			this.recipeStore = this.recipeService.getRecipeStoreObservable();
-					// 			this.recipeStore.subscribe(
-					// 				data => { 
-					// 					this.tags = data.tags;
-					// 					this.tags.forEach((tag) => {
-					// 						recipe.tags.forEach((recTag) => {
-					// 							if(recTag === tag.name) {
-					// 								tag.selected = true;
-					// 							}
-					// 						})
-					// 					})
-					// 			});
-					// 		},
-					// 		err =>  console.log(err)
-					// 	);
-					
+					this.tagStore = this.recipeService.getTagStoreObservable();
+					this.tagStore.subscribe(
+						data => {
+							this.tags = data.tags;
+							this.tags.forEach((tag) => {
+								tag.selected = (this.recipe.tags.indexOf(tag.name) > -1);								
+							});
+						}
+					);				
 				}
 			});
 		} else {
@@ -81,24 +62,16 @@ export class RecipeDetailComponent implements OnInit {
 			this.recipe.ingredients = [];
 			this.recipe.instructions = [];
 			this.recipe.tags = [];
-		}
-
-
-		
-  	}
+		}		
+	}
 
 
 	addIngredient(): void {
-		var newGroup = new Ingredient();
-		console.info(' adding new ingreidnets		')
-		//newGroup.title = "";
-		//newGroup.ingredients = [];
-		console.info(' before => ', this.recipe.ingredients)
+		let newGroup = new Ingredient();
 		this.recipe.ingredients.push(newGroup);
-		console.info(' after  => ', this.recipe.ingredients)
 	}
 
-	addIngredientToGroup() :void {
+	addIngredientToGroup(): void {
 
 	}
 
@@ -111,14 +84,14 @@ export class RecipeDetailComponent implements OnInit {
 		this.recipe.instructions.push(new Instruction(newId));    
 	}
 
-	deleteInstruction(index):void {
+	deleteInstruction(index): void {
 		this.recipe.instructions.splice(index, 1);
 	}
 
-	toggleTag(tag : RecipeTag):void {
+	toggleTag(tag : RecipeTag): void {
 		if(tag.selected) {
 			this.recipe.tags.forEach((recTag, idx) => {
-				if(recTag == tag.name) {
+				if(recTag === tag.name) {
 					this.recipe.tags.splice(idx, 1);
 					tag.selected = false;
 				}
@@ -126,9 +99,7 @@ export class RecipeDetailComponent implements OnInit {
 		} else {
 			this.recipe.tags.push(tag.name);
 			tag.selected = true;
-		}
-		// console.log('tag ', tag)
-		// tag.selected = !tag.selected;
+		}		
 	}
 
 	checkingForEnter(event, index): void {
@@ -146,28 +117,14 @@ export class RecipeDetailComponent implements OnInit {
 	}
 
 	updateRecipe(): void {
-		console.log('saving');
-		let response = this.recipeService.addRecipeToStore(this.recipe);
-		console.info('response => ', response)
-
+		this.recipeService.addRecipeToStore(this.recipe);
+		
 		if(this.recipe._id) {
 			window.history.back();
 		} else {
-			console.log("ain't got no history");
+			console.log('ain\'t got no history');
 			window.history.back();
-		}
-			// .subscribe(
-			// 	updatedRecipe => { 
-			// 		console.log('done ', updatedRecipe);
-			// 		if(this.recipe._id) {
-			// 			window.history.back();
-			// 		} else {
-			// 			console.log("don't got no history");
-			// 		}
-			// 	},
-			// 	err => console.log(err),
-			// 	() => { console.log('we have finished here') }
-			// );		
+		}			
 	}
 
 	deleteIngredientGroup(index :number): void {
@@ -176,12 +133,12 @@ export class RecipeDetailComponent implements OnInit {
 
 
 
-  custom(index,item){    
-    return index;
-  }
+	custom(index, item) {    
+		return index;
+	}
 
-  goBack(): void {
-    window.history.back();
-  }
+	goBack(): void {
+		window.history.back();
+	}
 
 }

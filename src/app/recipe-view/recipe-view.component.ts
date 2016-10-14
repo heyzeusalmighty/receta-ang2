@@ -26,6 +26,8 @@ export class RecipeViewComponent implements OnInit {
 		this.route.params.forEach((params: Params) => {
 			let id = params['id'];
 			this.recipe = this.recipeService.getRecipeObservable(id);
+			
+
 		});
 	}
 
@@ -39,10 +41,7 @@ export class RecipeViewComponent implements OnInit {
 		console.log('are you sure you want to do that?');
 		this.deleting = false;
 
-		this.recipeService.removeRecipe(this.recipe._id)
-			.subscribe((res) => this.response = res,
-			err => console.log(err)
-		);
+		this.recipeService.removeRecipe(this.recipe._id);			
 
 		//go back to recipes page		
 		this.router.navigate(['/recipes']);

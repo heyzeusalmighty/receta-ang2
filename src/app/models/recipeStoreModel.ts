@@ -6,4 +6,9 @@ export class RecipesStoreModel {
 	filteredRecipes: Array<Recipe> = [];
 	tags: Array<RecipeTag> = [];
 	selectedRecipe: Recipe;
+
+	constructor() {
+		this.recipes = [];
+		this.tags = [];
+	}
 };

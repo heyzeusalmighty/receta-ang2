@@ -2,7 +2,7 @@ import { RecipesStoreModel } from './recipeStoreModel';
 
 
 
-export interface AppState {
-  counter: number;
-  recipes: RecipesStoreModel;
-}
+// export interface AppState {
+//   counter: number;
+//   recipes: RecipesStoreModel;
+// }

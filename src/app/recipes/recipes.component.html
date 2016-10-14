@@ -29,21 +29,13 @@
 		<md-list>
 			<md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
 				<img md-list-avatar src="assets/monkeys.jpg" alt="monkey">
-				<h5 md-line>{{recipe.recipeName}}</h5>
+				<h5 md-line>{{recipe.recipeName}} => {{recipe._id}}</h5>
 				<p md-line class="recipeDescription">{{recipe.description}}</p>    
 			</md-list-item>
 		</md-list>
 
-		<div>
-			<h5 class="stupidClass">Those other guys</h5>
-			{{$recipes | async | json}}
-			<!--<ul>
-				<li *ngFor="let rec of $recipes.recipes | async"> {{ rec.recipeName }} </li>
-			</ul>-->
 
-
-		</div>
-
+		
 		
 		
 

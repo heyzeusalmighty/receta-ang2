@@ -7,7 +7,7 @@ import { RecipeService } from '../services/recipe.service';
 import { Recipe } from '../models/recipe';
 import { RecipeTag } from '../models/tag';
 import { RecipesStoreModel } from '../models/recipeStoreModel';
-import { AppState } from '../models/appstate';
+//import { AppState } from '../models/appstate';
 
 @Component({
 	selector: 'app-recipes',
@@ -19,19 +19,19 @@ export class RecipesComponent implements OnInit {
 	recentRecipes: Recipe[];
 	selectedRecipe: Recipe;
 	recipeStore : Observable<any>;
-	recipeModels : Observable<any[]>;
+	tagStore : Observable<any>;
 	tags: RecipeTag[];
 	searchString : string;
 	searchingFlag : boolean = false;
 
-	$recipeModel: Observable<RecipesStoreModel>;
+	// $recipeModel: Observable<RecipesStoreModel>;
 	$recipes: Observable<Recipe[]>;	
 	//$recipes: 
 
   
 
 	constructor(private router: Router, private recipeService: RecipeService) {
-		this.$recipes = this.recipeService.getRecipesObservable();
+		//this.$recipes = this.recipeService.getRecipesObservable();
 
 	}
 
@@ -41,19 +41,11 @@ export class RecipesComponent implements OnInit {
 
 	getRecipes(): void {
 		this.recipeStore = this.recipeService.getRecipeStoreObservable();
-		this.recipeStore.subscribe(
-			data => { 
-				this.recentRecipes = data.recipes;
-				this.tags = data.tags;
-		});
+		this.recipeStore.subscribe(data => this.recentRecipes = data.recipes);
 
-		if(!this.recipeService.madeRecipeCall) {
-			this.recipeService.getRecipes();
-		}
+		this.tagStore = this.recipeService.getTagStoreObservable();
+		this.tagStore.subscribe( data => this.tags = data.tags);
 
-		if(!this.recipeService.madeTagCall) {
-			this.recipeService.getTags();
-		}
 	}
 
 	addNewRecipe(): void {		
