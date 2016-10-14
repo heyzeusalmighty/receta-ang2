@@ -6,6 +6,10 @@ md-list-item {
     color: gray;
 }
 
+.tag-area {
+  padding-top: 15px;
+}
+
 
 @media screen and (min-width: 800px) {
   ._10 {
