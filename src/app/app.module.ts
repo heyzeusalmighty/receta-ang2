@@ -28,6 +28,7 @@ import { IngredientEditorComponent } from './ingredient-editor/ingredient-editor
 import { AutofocusInputComponent } from './autofocus-input/autofocus-input.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { RecipeEffectsService } from './services/recipe-effects.service';
+import { YummlyComponent } from './yummly/yummly.component';
 
 
 const appReducers: any = {
@@ -46,7 +47,8 @@ const appReducers: any = {
 		TagInputComponent,
 		IngredientEditorComponent,
 		AutofocusInputComponent,
-		RecipeSearchComponent
+		RecipeSearchComponent,
+		YummlyComponent
 	],
 	imports: [
 		BrowserModule,

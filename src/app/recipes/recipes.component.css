@@ -10,15 +10,3 @@ md-list-item {
   padding-top: 15px;
 }
 
-
-@media screen and (min-width: 800px) {
-  ._10 {
-    flex: 1.0;
-  }
-  ._80 {
-    flex: 8.0;
-  }
-  ._20 {
-    flex: 2;
-  }
-}

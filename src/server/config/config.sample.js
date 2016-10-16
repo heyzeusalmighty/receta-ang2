@@ -8,6 +8,8 @@
 module.exports = {
   DOMAIN:           'http://localhost:9000',
   DB_ADDRESS:       'mongodb://localhost:27017/test',
+  yummlyAppId:      '',
+  yummlyAppKey:     '',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''

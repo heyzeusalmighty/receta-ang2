@@ -36,6 +36,16 @@ body, input[text], button {
   .column {
     flex: 1;
   }
+
+  ._10 {
+    flex: 1.0;
+  }
+  ._80 {
+    flex: 8.0;
+  }
+  ._20 {
+    flex: 2;
+  }
 }
 
 

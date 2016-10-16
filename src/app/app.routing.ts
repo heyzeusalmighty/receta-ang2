@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
+import { YummlyComponent } from './yummly/yummly.component';
 
 const appRoutes: Routes = [
 
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
     {
         path: 'view/:id',
         component: RecipeViewComponent
+    },
+    {
+        path: 'yummly',
+        component: YummlyComponent
     },
     {
         path: '',

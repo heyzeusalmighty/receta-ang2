@@ -22,11 +22,16 @@
 		<h4>Recipes</h4>
 
 		<div>
-			<button md-mini-fab (click)="addNewRecipe()">  
+			<button md-mini-fab (click)="addNewRecipe()" title="Add New Recipe">  
 				<i class="material-icons md-24">add</i>
 			</button>
 
-			<recipe-search></recipe-search>
+			<recipe-search title="Recipe Search"></recipe-search>
+
+			<button md-mini-fab (click)="toTheYummly()" title="3rd Party Search">
+				<i class="material-icons md-24">cloud_download</i>
+			</button>
+
 		</div>
 
 		<md-list>

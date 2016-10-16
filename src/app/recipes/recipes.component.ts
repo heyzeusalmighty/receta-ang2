@@ -65,6 +65,11 @@ export class RecipesComponent implements OnInit {
 
 	}
 
+	toTheYummly() : void {
+		console.log('to yummly');
+		this.router.navigate(['/yummly']);
+	}
+
 
 
 }
