@@ -5,6 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 const chalk = require('chalk');
 var config = require('./../config/config');
+var http = require('http');
 
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
@@ -17,44 +18,47 @@ var appKey = config.yummlyAppKey;
 var authUrl = "?_app_id=" + appId + "&_app_key=" + appKey;
 var searchOut = hostName + "recipes" + authUrl + "&maxResult=10&q=";
 
+let dummyResponse = require('./dummyResponse');
 
-// router.get('/:search/:page', controller.nextPage);
-// router.get('/:recipeId', controller.show);
-// router.post('/:recipeId', controller.getInstructions);
 
 router.get('/:search/:page', (req, res) => {
-	var search = req.params.search;
-	var page = req.params.page * 10;
-	var replaced = search.split(' ').join('+');
-	var totes = searchOut + replaced + "&start=" + page;
 
-	var request = http.request(totes, function(response){
-		var body = "";
-		response.on('data', function(data) {
-			body += data;
-		});
-		response.on('end', function() {
-			res.send(JSON.parse(body));
-		});
-	});
+	// doing this right now so I don't hammer the yummly service
+	res.send(dummyResponse);
 
-	request.on('error', function(e) {
-		console.log('Problem with request: ' + e.message);
-	});
+	// // REAL CODE
+	// var search = req.params.search;
+	// var page = req.params.page * 10;
+	// var replaced = search.split(' ').join('+');
+	// var totes = searchOut + replaced + "&start=" + page;
 
-	request.end();
+	// var request = http.request(totes, function(response){
+	// 	var body = "";
+	// 	response.on('data', function(data) {
+	// 		body += data;
+	// 	});
+	// 	response.on('end', function() {
+	// 		res.send(JSON.parse(body));
+	// 	});
+	// });
+
+	// request.on('error', function(e) {
+	// 	console.log('Problem with request: ' + e.message);
+	// });
+
+	// request.end();
 });
 
 
 router.get('/:recipeId', (req, res) => {
 
-	var search = req.params.recipeId;
-	var finalUrl = hostName + "recipe/" + search + authUrl;	
-	console.log(finalUrl);
+	let search = req.params.recipeId;
+	let finalUrl = hostName + "recipe/" + search + authUrl;	
+	console.log(chalk.green('pointing to => ', finalUrl));
 
-	var request = http.request(finalUrl, function(response){
+	let request = http.request(finalUrl, function(response){
 		
-		var body = "";
+		let body = "";
 		response.on('data', function(data) {
 			body += data;
 		});

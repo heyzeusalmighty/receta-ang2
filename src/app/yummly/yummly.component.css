@@ -1,0 +1,21 @@
+
+
+.recipe-card-square {
+	width: 320px;
+	height: 320px;
+}
+
+md-grid-tile h4 {
+	color: white;
+	font-weight: 800;
+}
+
+md-grid-tile p {
+	color: white;
+}
+
+td h4 {
+	color: red;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

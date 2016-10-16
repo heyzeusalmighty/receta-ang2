@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Rx';
+
 import { YummlyService } from '../services/yummly.service';
 
 @Component({
@@ -9,7 +11,9 @@ import { YummlyService } from '../services/yummly.service';
 })
 export class YummlyComponent implements OnInit {
 
-	searchTerm: string;
+	searchTerm: string = 'cinnamon';
+	pageNumber: number = 0;
+	searchResults: Observable<any>;
 
 	constructor(private yumService : YummlyService) { }
 
@@ -23,10 +27,17 @@ export class YummlyComponent implements OnInit {
 	checkingForEnter(event, index): void {
 		//keycode of the enter key is 13 btw
 		if(event.keyCode === 13) {
-			//this.addThisTag();
 			console.log('enter')
-
+			this.searchYummly();
 		}
+	}
+
+	searchYummly() : void {
+		console.info('searching for ', this.searchTerm);
+		this.yumService.searchYummly(this.searchTerm, this.pageNumber)
+			.subscribe(
+				data => this.searchResults = data
+			);
 	}
 
 }

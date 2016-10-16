@@ -10,6 +10,7 @@ import { MdIconModule } from '@angular2-material/icon';
 import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
+import { MdGridListModule } from '@angular2-material/grid-list';
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -63,6 +64,7 @@ const appReducers: any = {
 		MdSidenavModule.forRoot(),
 		MdInputModule.forRoot(),
 		MdListModule.forRoot(),
+		MdGridListModule.forRoot(),
 		StoreModule.provideStore(appReducers),
 		EffectsModule.run(RecipeEffectsService)
 	],
