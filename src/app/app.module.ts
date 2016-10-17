@@ -13,6 +13,7 @@ import { MdListModule } from '@angular2-material/list';
 import { MdGridListModule } from '@angular2-material/grid-list';
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,8 @@ import { AutofocusInputComponent } from './autofocus-input/autofocus-input.compo
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { RecipeEffectsService } from './services/recipe-effects.service';
 import { YummlyComponent } from './yummly/yummly.component';
+import { DragComponent } from './drag/drag.component';
+import { DraggableDirective } from './shared/draggable';
 
 
 const appReducers: any = {
@@ -49,7 +52,9 @@ const appReducers: any = {
 		IngredientEditorComponent,
 		AutofocusInputComponent,
 		RecipeSearchComponent,
-		YummlyComponent
+		YummlyComponent,
+		DragComponent,
+		DraggableDirective
 	],
 	imports: [
 		BrowserModule,
@@ -66,7 +71,8 @@ const appReducers: any = {
 		MdListModule.forRoot(),
 		MdGridListModule.forRoot(),
 		StoreModule.provideStore(appReducers),
-		EffectsModule.run(RecipeEffectsService)
+		EffectsModule.run(RecipeEffectsService),
+		DragulaModule
 	],
 	providers: [],
 	entryComponents: [AppComponent],

@@ -16,7 +16,8 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../node_modules/material-design-lite/material.css"
+        "../node_modules/material-design-lite/material.css",
+        "../node_modules/dragula/dist/dragula.min.css"
       ],
       "scripts": [],
       "environments": {
