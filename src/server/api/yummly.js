@@ -24,29 +24,29 @@ let dummyResponse = require('./dummyResponse');
 router.get('/:search/:page', (req, res) => {
 
 	// doing this right now so I don't hammer the yummly service
-	res.send(dummyResponse);
+	//res.send(dummyResponse);
 
-	// // REAL CODE
-	// var search = req.params.search;
-	// var page = req.params.page * 10;
-	// var replaced = search.split(' ').join('+');
-	// var totes = searchOut + replaced + "&start=" + page;
+	// REAL CODE
+	var search = req.params.search;
+	var page = req.params.page * 10;
+	var replaced = search.split(' ').join('+');
+	var totes = searchOut + replaced + "&start=" + page;
 
-	// var request = http.request(totes, function(response){
-	// 	var body = "";
-	// 	response.on('data', function(data) {
-	// 		body += data;
-	// 	});
-	// 	response.on('end', function() {
-	// 		res.send(JSON.parse(body));
-	// 	});
-	// });
+	var request = http.request(totes, function(response){
+		var body = "";
+		response.on('data', function(data) {
+			body += data;
+		});
+		response.on('end', function() {
+			res.send(JSON.parse(body));
+		});
+	});
 
-	// request.on('error', function(e) {
-	// 	console.log('Problem with request: ' + e.message);
-	// });
+	request.on('error', function(e) {
+		console.log('Problem with request: ' + e.message);
+	});
 
-	// request.end();
+	request.end();
 });
 
 

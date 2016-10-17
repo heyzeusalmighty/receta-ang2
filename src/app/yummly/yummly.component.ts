@@ -14,6 +14,9 @@ export class YummlyComponent implements OnInit {
 	searchTerm: string = 'cinnamon';
 	pageNumber: number = 0;
 	searchResults: Observable<any>;
+	recipeSelected: boolean = false;
+	selectedRecipe;
+	selectedRecipeExpand : boolean = false;
 
 	constructor(private yumService : YummlyService) { }
 
@@ -37,6 +40,25 @@ export class YummlyComponent implements OnInit {
 		this.yumService.searchYummly(this.searchTerm, this.pageNumber)
 			.subscribe(
 				data => this.searchResults = data
+			);
+	}
+
+	getYumRecipe(rec) {
+		console.log(rec.id);
+		this.selectedRecipeExpand = false;
+		this.yumService.getRecipe(rec.id)
+			.subscribe(
+				(data) => {
+					this.recipeSelected = true;
+					this.selectedRecipe = data;
+			});
+		
+	}
+
+	addYumRecipeToCollection() : void {
+		this.yumService.addRecipeToCollection(this.selectedRecipe.id)
+			.subscribe(
+				data => console.log('data', data)
 			);
 	}
 

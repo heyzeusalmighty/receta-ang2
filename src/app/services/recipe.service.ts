@@ -35,7 +35,6 @@ export class RecipeService {
 
 
 	getRecipes() {
-		console.log('hi we are getRecipes');
 		this.store.dispatch({ type: LOAD_RECIPES});		
 	}
 

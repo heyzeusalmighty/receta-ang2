@@ -46,6 +46,13 @@ body, input[text], button {
   ._20 {
     flex: 2;
   }
+  ._40 {
+    flex: 4;
+  }
+  ._60 {
+    flex: 6;
+  }
+
 }
 
 

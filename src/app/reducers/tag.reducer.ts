@@ -32,7 +32,6 @@ export const tagReducer: ActionReducer<State> = (state = initialState, action: A
 
 		case ADD_TAG_SUCCESS:
 		case LOAD_TAGS_SUCCESS:
-			console.log('adding some tags, don\'t mind me');
 			let newVersion = state.tags.concat(action.payload);
 			return Object.assign({}, state, { tags: newVersion });
 

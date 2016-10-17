@@ -26,11 +26,7 @@ export class RecipeEffectsService {
 		.ofType('ADD_RECIPE')
 		.map(action => JSON.stringify(action.payload))
 		.switchMap(payload => this.http.post(this.recipesUrl, payload, this.options)
-			//.map(res => ({ type: 'ADD_RECIPE_SUCCESS', payload: res.json() }))
-			.map(res => {
-				console.log(' hi from effects, you just posted a brand new recipe ');
-				return ({ type: 'ADD_RECIPE_SUCCESS', payload: res.json() });
-			})			
+			.map(res =>  ({ type: 'ADD_RECIPE_SUCCESS', payload: res.json() }))			
 			.catch(() => Observable.of({ type: 'ADD_RECIPE_FAILED'}))			
 		);
 	
@@ -38,10 +34,7 @@ export class RecipeEffectsService {
 		.ofType('LOAD_RECIPES')
 		.map(action => JSON.stringify(action.payload))
 		.switchMap(payload => this.http.get(this.recipesUrl))
-			.map( res => { 
-				console.log(' hi from effects.  attempting to load some recipes'); 
-				return ({ type: 'LOAD_RECIPES_SUCCESS', payload: res.json() });
-			})
+			.map( res => ({ type: 'LOAD_RECIPES_SUCCESS', payload: res.json() }))
 			.catch(() => Observable.of({ type: 'LOAD_RECIPES_FAILED'})
 		);
 
@@ -49,10 +42,7 @@ export class RecipeEffectsService {
 		.ofType('LOAD_TAGS')
 		.map(action => JSON.stringify(action.payload))
 		.switchMap(payload => this.http.get(this.tagsUrl))
-			.map( res => { 
-				console.log(' hi from effects.  attempting to load some tags'); 
-				return ({ type: 'LOAD_TAGS_SUCCESS', payload: res.json() });
-			})
+			.map( res => ({ type: 'LOAD_TAGS_SUCCESS', payload: res.json() }))
 			.catch(() => Observable.of({ type: 'LOAD_RECIPES_FAILED'})
 		);
 

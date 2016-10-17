@@ -12,8 +12,13 @@
 	</div>
 </div>
 
+<!--
+<div [ngClass]="{'css-class-1':varA === varB, 'css-class-2': varA !== varB}">-->
 <div class="row" *ngIf="searchResults">
-	<div class="column">
+	<div class="column _60" >
+		
+		<!--[ngClass]="recipeSelected ? '_40' : '_60'"-->
+
 		Total Results = {{searchResults.totalMatchCount}}
 
 		<table>
@@ -22,7 +27,7 @@
 				<th>Title</th>
 				<th>Rating</th>
 			</tr>
-			<tr *ngFor="let rec of searchResults.matches">
+			<tr *ngFor="let rec of searchResults.matches" (click)="getYumRecipe(rec)">
 				<td><img src="{{rec.imageUrlsBySize[90]}}" /></td>
 				<td>
 					<h4>{{rec.recipeName}}</h4>
@@ -35,18 +40,75 @@
 
 
 		</table>
+	</div>
 
 
-		<md-list>
-			<md-list-item *ngFor="let rec of searchResults.matches">
-				<img md-list-avatar src="{{rec.imageUrlsBySize[90]}}" alt="...">
-				<h3 md-line> {{rec.recipeName}} </h3>
-				<p md-line>
-					<span> {{rec.sourceDisplayName}} </span>
-					<span class="demo-2"> -- {{rec.rating}} </span>
-				</p>
-			</md-list-item>
-		</md-list>
+	<div [ngClass]="{'column _40': recipeSelected }">
+		<!--{{selectedRecipe | json}}-->
+
+		<!--<md-card *ngIf="recipeSelected">
+			<md-card-title-group>
+				<img md-card-lg-image src="{{selectedRecipe.images[0].hostedLargeUrl}}">
+				<md-card-title>
+					{{selectedRecipe.name}}
+				</md-card-title>
+				<md-card-subtitle>Serving Size : {{selectedRecipe.numberOfServings}}</md-card-subtitle>
+			</md-card-title-group>	
+			<md-card-content>
+				<p>This is supporting text.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+			</md-card-content>
+		</md-card>-->
+
+
+
+
+		<div class="recipe-card-square mdl-card mdl-shadow--2dp" *ngIf="recipeSelected">
+			<div class="mdl-card__title mdl-card--expand" style="height: 240px"
+				[style.background-image]="'url(' + selectedRecipe.images[0].hostedLargeUrl + ')'"> 
+			
+			</div>
+			<div class="mdl-card__supporting-text">
+				<h4>{{selectedRecipe.name}}</h4>
+				Serving Size : {{selectedRecipe.numberOfServings}}<br/>
+				Rating : {{ selectedRecipe.rating}}<br />
+				Source : <a href="{{selectedRecipe.source.sourceRecipeUrl}}">{{ selectedRecipe.source.sourceDisplayName }}</a>
+			</div>
+			<div class="mdl-card__supporting-text" *ngIf="selectedRecipeExpand">
+				<h6>Ingredients</h6>
+				<ul>
+					<li *ngFor="let line of selectedRecipe.ingredientLines">{{line}}</li>
+				</ul>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" (click)="selectedRecipeExpand = true">
+					See More
+				</a>
+				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" (click)="addYumRecipeToCollection()">
+					Add to Collection
+				</a>
+			</div>
+		</div>
+		
+
+	</div>
+
+</div>
+
+
+<!--
+<md-list>
+	<md-list-item *ngFor="let rec of searchResults.matches">
+		<img md-list-avatar src="{{rec.imageUrlsBySize[90]}}" alt="...">
+		<h3 md-line> {{rec.recipeName}} </h3>
+		<p md-line>
+			<span> {{rec.sourceDisplayName}} </span>
+			<span class="demo-2"> -- {{rec.rating}} </span>
+		</p>
+	</md-list-item>
+</md-list>
+-->
 
 <!--
 <md-grid-list cols="4" [style.background]="'white'" gutterSize="4px">
@@ -82,5 +144,3 @@
 
 
 
-	</div>
-</div>
