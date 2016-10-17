@@ -53,7 +53,6 @@ export class YummlyService {
 			.map((res: Response) =>  {
 				this.store.dispatch({ type: ADD_RECIPE, payload: res.json()});
 				return res.json();
-
 			});
 	}
 

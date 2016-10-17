@@ -1,15 +1,13 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-var config = require('./../config/config');
+var config = require('./../../config/config');
 var http = require('http');
 
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
-var Recipe = require('../models/recipe.model.js');
+var Recipe = require('./../../models/recipe.model.js');
 
 var hostName = "http://api.yummly.com/v1/api/";
 var yumEndpoint = "/v1/api/"
@@ -20,8 +18,7 @@ var searchOut = hostName + "recipes" + authUrl + "&maxResult=10&q=";
 
 let dummyResponse = require('./dummyResponse');
 
-
-router.get('/:search/:page', (req, res) => {
+exports.nextPage = function(req, res) {
 
 	// doing this right now so I don't hammer the yummly service
 	//res.send(dummyResponse);
@@ -47,10 +44,9 @@ router.get('/:search/:page', (req, res) => {
 	});
 
 	request.end();
-});
+}
 
-
-router.get('/:recipeId', (req, res) => {
+exports.show = function(req, res) {
 
 	let search = req.params.recipeId;
 	let finalUrl = hostName + "recipe/" + search + authUrl;	
@@ -73,10 +69,9 @@ router.get('/:recipeId', (req, res) => {
 
 	request.end();
 
-});
+}
 
-
-router.post('/:recipeId', (req, res) => {
+exports.getInstructions = function(req, res) {
 	var recipeId = req.params.recipeId;
 
 	console.log('getting instructions', recipeId);
@@ -152,7 +147,7 @@ router.post('/:recipeId', (req, res) => {
 
 
 	});
-});
+}
 
 
 
@@ -163,6 +158,3 @@ router.post('/:recipeId', (req, res) => {
 
 
 
-
-
-module.exports = router;
