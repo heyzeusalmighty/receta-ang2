@@ -12,6 +12,7 @@
 				</button>
 			</p>
 			<p>Serving Size : {{recipe.servingSize}}</p>
+			<p *ngIf="recipe.yummlyId.length > 1">Source : <a href="{{recipe.sourceUrl}}">{{recipe.sourceUrl}}</a></p>
 			
 			<h5>Ingredients</h5>
 
@@ -32,9 +33,11 @@
 		<md-card-actions>
 			<button md-raised-button (click)="goBack()">BACK</button>
 			<button md-raised-button (click)="editRecipe()">EDIT</button>
+			<button md-raised-button *ngIf="showScrapeButton" (click)="scrapyScrapy()">SCRAPE</button>
 			<button md-raised-button *ngIf="!deleting" (click)="deleting = true">DELETE</button>
 			<button md-raised-button *ngIf="deleting" color="primary" (click)="deleting = false">CANCEL</button>
 			<button md-raised-button *ngIf="deleting" color="accent" (click)="deleteRecipe()">For Real Delete</button>
+
 		</md-card-actions>
 	</md-card>
 

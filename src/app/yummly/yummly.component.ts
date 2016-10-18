@@ -18,6 +18,7 @@ export class YummlyComponent implements OnInit {
 	recipeSelected: boolean = false;
 	selectedRecipe;
 	selectedRecipeExpand : boolean = false;
+	selectedRecipeGrabbed : boolean = false;
 
 	constructor(private yumService : YummlyService) { }
 
@@ -46,6 +47,7 @@ export class YummlyComponent implements OnInit {
 	getYumRecipe(rec) {
 		console.log(rec.id);
 		this.selectedRecipeExpand = false;
+		this.selectedRecipeGrabbed = false;
 		this.yumService.getRecipe(rec.id)
 			.subscribe(
 				(data) => {
@@ -58,6 +60,7 @@ export class YummlyComponent implements OnInit {
 	addYumRecipeToCollection() : void {
 		let converted = this.convertSelectedToRecipe();
 		this.yumService.addRecipeToCollection(converted);
+		this.selectedRecipeGrabbed = true;
 	}
 
 

@@ -12,6 +12,13 @@ export class Recipe {
 	source: string;
 	sourceUrl: string;
 	yummlyId: string;    
+
+	constructor() {
+		this.yummlyId = '';
+		this.source = '';
+		this.sourceUrl = '';
+		this.imageUrl = '';
+	}
 }
 
 

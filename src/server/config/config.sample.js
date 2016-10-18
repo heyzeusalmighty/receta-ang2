@@ -10,6 +10,8 @@ module.exports = {
   DB_ADDRESS:       'mongodb://localhost:27017/test',
   yummlyAppId:      '',
   yummlyAppKey:     '',
+  proxyAddress:     '',
+  usingProxy:       false,
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''

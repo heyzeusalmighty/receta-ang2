@@ -85,9 +85,10 @@
 				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" (click)="selectedRecipeExpand = true">
 					See More
 				</a>
-				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" (click)="addYumRecipeToCollection()">
+				<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" (click)="addYumRecipeToCollection()" *ngIf="!selectedRecipeGrabbed">
 					Add to Collection
-				</a>
+				</a>				
+
 			</div>
 		</div>
 		

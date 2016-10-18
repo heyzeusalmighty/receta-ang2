@@ -19,14 +19,15 @@ export class YummlyService {
 
 	searchYummly(searchTerm : string, pageNumber : number) {
 
-		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-		let options		= new RequestOptions({ headers: headers }); // Create a request option
+		//let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+		//let options		= new RequestOptions({ headers: headers }); // Create a request option
 
 		let searchUrl = this.yummlyUrl + '/' + searchTerm + '/' + pageNumber;
 
-		//return Observable.of(this.dummyResponse).map(o => JSON.stringify(o));
+		// return this.http.get(searchUrl, options )
+		// 	.map((res: Response) => res.json());
 
-		return this.http.get(searchUrl, options )
+		return this.http.get(searchUrl)
 			.map((res: Response) => res.json());
 
 	}
