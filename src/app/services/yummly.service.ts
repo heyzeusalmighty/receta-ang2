@@ -41,19 +41,21 @@ export class YummlyService {
 			.map((res: Response) => res.json());
 	}
 
-	addRecipeToCollection(id : string) {
+	addRecipeToCollection(body : Object) {
 
-		console.info('id from yumm ', id);
-		let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-		let options		= new RequestOptions({ headers: headers }); // Create a request option
+		this.store.dispatch({ type: ADD_RECIPE, payload: body});
 
-		let savingUrl = this.yummlyUrl + '/' + id;
+		// console.info('id from yumm ', id);
+		// let headers		= new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+		// let options		= new RequestOptions({ headers: headers }); // Create a request option
 
-		return this.http.post(savingUrl, options)
-			.map((res: Response) =>  {
-				this.store.dispatch({ type: ADD_RECIPE, payload: res.json()});
-				return res.json();
-			});
+		// let savingUrl = this.yummlyUrl + '/' + id;
+
+		// return this.http.post(savingUrl, options)
+		// 	.map((res: Response) =>  {
+		// 		this.store.dispatch({ type: ADD_RECIPE, payload: res.json()});
+		// 		return res.json();
+		// 	});
 	}
 
 

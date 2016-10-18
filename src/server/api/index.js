@@ -24,7 +24,7 @@ module.exports = function(app) {
         next();
     });
     
-    app.use('/api/recipes', require('./recipes'));
+    app.use('/api/recipes', require('./recipe'));
     app.use('/api/tags', require('./tags'));
     app.use('/api/yummly', require('./yummly'));
 

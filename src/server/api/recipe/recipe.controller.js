@@ -1,31 +1,35 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
 const chalk = require('chalk');
 
 var db = mongoose.connection;
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;  
 
-var Recipe = require('../models/recipe.model.js');
+var Recipe = require('../../models/recipe.model.js');
 
-router.get('/', (req, res) => {
+
+
+exports.getAllRecipes = function(req, res) {
     Recipe.find({}, (err, docs) => {
         if (err) return console.error(err);
         res.json(docs);
     })
-})
+};
 
-router.get('/:id', (req, res) => {
+
+
+exports.getSingleRecipe = function(req, res) {
     let recipeId = req.params.id;
     Recipe.findById(recipeId, (err, recipe) => {
         if (err) return console.error(err);
         res.json(recipe);
     });
-});
+};
 
-router.post('/', (req, res) => {
+
+
+exports.saveRecipe = function(req, res) {
     
     console.log(chalk.blue('myBodyIsReady  :: ') + chalk.green(req.body));
 
@@ -43,29 +47,19 @@ router.post('/', (req, res) => {
         console.log(chalk.blue('new/updated doc => '), chalk.green(doc));
         res.send(doc);
     })    
-});
+}
 
-router.delete('/:id', (req, res) => {
+
+
+exports.deleteRecipe = function(req, res) {
     let recipeId = req.params.id;
     let query = { '_id' : req.params.id };
     Recipe.remove(query, (err) => {
         if (err) return console.log(err);
         res.send(recipeId)
-    })
-
-})
-
-
-
-module.exports = router;
+    });
+};
 
 
 
 
-
-//app.get('/cats', function(req, res) {
-//     Cat.find({}, function(err, docs) {
-//       if(err) return console.error(err);
-//       res.json(docs);
-//     });
-//   });

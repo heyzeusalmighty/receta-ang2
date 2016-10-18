@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { YummlyService } from '../services/yummly.service';
+import { Recipe, Ingredient, Instruction } from '../models/recipe';
 
 @Component({
 	selector: 'app-yummly',
@@ -30,13 +31,12 @@ export class YummlyComponent implements OnInit {
 	checkingForEnter(event, index): void {
 		//keycode of the enter key is 13 btw
 		if(event.keyCode === 13) {
-			console.log('enter')
+			console.log('enter');
 			this.searchYummly();
 		}
 	}
 
 	searchYummly() : void {
-		console.info('searching for ', this.searchTerm);
 		this.yumService.searchYummly(this.searchTerm, this.pageNumber)
 			.subscribe(
 				data => this.searchResults = data
@@ -56,10 +56,25 @@ export class YummlyComponent implements OnInit {
 	}
 
 	addYumRecipeToCollection() : void {
-		this.yumService.addRecipeToCollection(this.selectedRecipe.id)
-			.subscribe(
-				data => console.log('data', data)
-			);
+		let converted = this.convertSelectedToRecipe();
+		this.yumService.addRecipeToCollection(converted);
+	}
+
+
+	convertSelectedToRecipe() : Recipe {
+		let rec = new Recipe();
+
+		rec.recipeName = this.selectedRecipe.name;
+		rec.description = 'pulled from Yummly';
+		rec.servingSize = this.selectedRecipe.numberOfServings;
+		rec.yummlyId = this.selectedRecipe.id;
+		rec.imageUrl = this.selectedRecipe.images[0].hostedLargeUrl;
+		rec.instructions = [new Instruction(1)];
+		rec.ingredients = [new Ingredient('From Yummly', this.selectedRecipe.ingredientLines)];
+		rec.source = this.selectedRecipe.source.sourceDisplayName;
+		rec.sourceUrl = this.selectedRecipe.source.sourceRecipeUrl;
+
+		return rec;
 	}
 
 }

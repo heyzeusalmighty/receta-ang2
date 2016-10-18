@@ -92,7 +92,7 @@ exports.getInstructions = function(req, res) {
 				var directions = [];
 
 			    if(rec.sourceUrl.indexOf('marthastewart') > -1) {
-			    	console.log('its a marthastewart');
+			    	console.log(chalk.red('its a marthastewart'));
 
 			    	var ins = $('div .col2 p').contents();
 

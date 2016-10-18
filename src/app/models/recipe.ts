@@ -19,9 +19,10 @@ export class Ingredient {
 	title: string;
 	ingredients: string[];
 
-	Ingredient() {
-		this.title = '';
-		this.ingredients = [''];
+	// not overloaded but handles emptiness
+	constructor(title?: string, ings?: string[]) {
+		this.title = title || '';
+		this.ingredients = ings || [''];
 	}
 }
 
