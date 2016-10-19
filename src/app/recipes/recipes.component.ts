@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 import { RecipeService } from '../services/recipe.service';
 import { Recipe } from '../models/recipe';
 import { RecipeTag } from '../models/tag';
-import { RecipesStoreModel } from '../models/recipeStoreModel';
 //import { AppState } from '../models/appstate';
 
 @Component({
@@ -68,6 +66,11 @@ export class RecipesComponent implements OnInit {
 	toTheYummly() : void {
 		console.log('to yummly');
 		this.router.navigate(['/yummly']);
+	}
+
+	updateFilter(searchString: string) : void {
+		console.log('searching for => ', searchString);
+		this.recipeService.updateFilter(searchString);
 	}
 
 

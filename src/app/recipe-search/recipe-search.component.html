@@ -15,3 +15,13 @@
 	(onBlur)="checkBlur()"	
 	 ngDefaultControl>
 </app-autofocus-input>
+
+<!--
+<button id="clear-filter" >
+	<i class="material-icons md-10">remove</i>
+</button>
+-->
+
+<button md-icon-button color="warn" (click)="clearFilter()" *ngIf="searchingFlag" title="clear filter">
+    <i class="material-icons md-10">remove_circle</i>
+</button>

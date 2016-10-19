@@ -35,7 +35,6 @@ export class RecipeDetailComponent implements OnInit {
 				let id = params['id'];
 				if(id.length > 0) {
 
-					//this.recipe = this.recipeService.getRecipeObservable(id);
 					this.recipeStore = this.recipeService.getRecipeStoreObservable();
 					this.recipeStore.subscribe(
 						data => {
@@ -59,9 +58,7 @@ export class RecipeDetailComponent implements OnInit {
 		} else {
 			//this is a new recipe clearly
 			this.recipe = new Recipe();
-			this.recipe.ingredients = [];
-			this.recipe.instructions = [];
-			this.recipe.tags = [];
+			
 		}		
 	}
 
@@ -95,7 +92,7 @@ export class RecipeDetailComponent implements OnInit {
 					this.recipe.tags.splice(idx, 1);
 					tag.selected = false;
 				}
-			})
+			});
 		} else {
 			this.recipe.tags.push(tag.name);
 			tag.selected = true;
@@ -117,6 +114,8 @@ export class RecipeDetailComponent implements OnInit {
 	}
 
 	updateRecipe(): void {
+
+		this.validate();
 		this.recipeService.addRecipeToStore(this.recipe);
 		
 		if(this.recipe._id) {
@@ -129,6 +128,20 @@ export class RecipeDetailComponent implements OnInit {
 
 	deleteIngredientGroup(index :number): void {
 		this.recipe.ingredients.splice(index, 1);
+	}
+
+	validate() : void {
+		if (this.recipe.yummlyId === null || this.recipe.yummlyId === undefined) {
+			this.recipe.yummlyId = '';
+		}
+
+		if (this.recipe.source === null || this.recipe.source === undefined) {
+			this.recipe.source = '';
+		}
+
+		if (this.recipe.sourceUrl === null || this.recipe.sourceUrl === undefined) {
+			this.recipe.sourceUrl = '';
+		}
 	}
 
 

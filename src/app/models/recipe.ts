@@ -18,6 +18,12 @@ export class Recipe {
 		this.source = '';
 		this.sourceUrl = '';
 		this.imageUrl = '';
+		this.recipeName = '';
+		this.description = '';
+		this.servingSize = '';
+		this.ingredients = [];
+		this.instructions = [];
+		this.tags = [];
 	}
 }
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE } from '../reducers/recipe.reducer';
+import { ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, UPDATE_FILTER, REMOVE_FILTER } from '../reducers/recipe.reducer';
 import { ADD_TAG, LOAD_TAGS } from '../reducers/tag.reducer';
 import { Store } from '@ngrx/store';
 
@@ -80,6 +80,15 @@ export class RecipeService {
 				error => console.error('error :: ', error)
 			);
 	}      
+
+	updateFilter(searchString: string) {
+
+		console.log('from service I got => ', searchString, ' :: length ', searchString.length);
+
+		(searchString.length === 0) 
+			? this.store.dispatch({ type: REMOVE_FILTER, payload: searchString }) 
+			: this.store.dispatch({ type: UPDATE_FILTER, payload: searchString });
+	}
 
 
 

@@ -31,9 +31,10 @@ export class RecipeViewComponent implements OnInit {
 			this.recipe = this.recipeService.getRecipeObservable(id);
 
 			setTimeout(() => {
-				if(this.recipe && this.recipe.yummlyId && this.recipe.yummlyId.length > 2 && this.recipe.instructions.length <= 1 ) {		
-					//	console.log(this.recipe.instructions.length)			
-					this.showScrapeButton = true;
+				if(this.recipe && this.recipe.yummlyId !== undefined) {
+					if(this.recipe.yummlyId.length > 2 && this.recipe.instructions.length <= 1 ) {		
+						this.showScrapeButton = true;
+					}
 				} else if (!this.recipe) {					
 					// this is pretty hacky but basically if it can't find the 
 					// recipe, go back to the main screen

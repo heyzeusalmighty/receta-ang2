@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
 	selector: 'recipe-search',
@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class RecipeSearchComponent implements OnInit {
 
 	searchingFlag : boolean = false;
-	searchString : string = "";
+	searchString : string = '';
+	@Output() updateFilter = new EventEmitter();
+
+
 	constructor() { }
 
 	ngOnInit() {
@@ -22,7 +25,16 @@ export class RecipeSearchComponent implements OnInit {
 	}
 
 	query(): void {
-		console.log('querying with ', this.searchString)
+		console.log('querying with ', this.searchString);
+		this.updateFilter.emit(this.searchString);
+
 	}
+
+	clearFilter() : void {
+		this.updateFilter.emit('');
+		this.searchingFlag = false;
+	}
+
+	//(addGuest)="addGuest($event)"
 
 }

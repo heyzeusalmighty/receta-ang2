@@ -26,11 +26,11 @@
 				<i class="material-icons md-24">add</i>
 			</button>
 
-			<recipe-search title="Recipe Search"></recipe-search>
-
 			<button md-mini-fab (click)="toTheYummly()" title="3rd Party Search">
 				<i class="material-icons md-24">cloud_download</i>
 			</button>
+
+			<recipe-search title="Recipe Search" (updateFilter)="updateFilter($event)"></recipe-search>
 
 		</div>
 

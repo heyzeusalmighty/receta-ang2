@@ -1,11 +1,11 @@
 
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { Recipe } from '../models/recipe';
-import { RecipeTag } from '../models/tag';
 import { RecipesStoreModel } from '../models/recipeStoreModel';
 
 import * as _ from 'lodash';
+
+import 'rxjs/add/operator/map';
 
 export const LOAD_RECIPES = 'LOAD_RECIPES';
 export const LOAD_RECIPES_SUCCESS = 'LOAD_RECIPES_SUCCESS';
@@ -24,19 +24,35 @@ export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const DELETE_RECIPE_SUCCESS = 'DELETE_RECIPE_SUCCESS';
 export const DELETE_RECIPE_FAILED = 'DELETE_RECIPE_FAILED';
 
+export const UPDATE_FILTER = 'UPDATE_FILTER';
+export const REMOVE_FILTER = 'REMOVE_FILTER';
+
 
 export const GET_RECIPE = 'GET_RECIPE';
 
 let initialState = new RecipesStoreModel();
 
 
-export const recipeReducer: ActionReducer<RecipesStoreModel> = ( state = initialState, action: Action) => {
+const filter = (state, action) => {
+	switch (action.type) {
+		case UPDATE_FILTER:
+			let x = state.filterCriteria.concat(action.payload);
+			let filteredSet = state.recipes.filter(x => x.recipeName.indexOf(action.payload) > -1);
+			return Object.assign({}, state, { filterCriteria: x, recipes: filteredSet });
+
+		default:
+			return state;
+	}
+};
+
+
+export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initialState, action: Action) => {
 	switch (action.type) {
 
 		case LOAD_RECIPES_SUCCESS:
 		case ADD_RECIPE_SUCCESS:
-			let x = state.recipes.concat(action.payload);
-			return Object.assign({}, state, { recipes: x});
+			let x = state.recipes.concat(action.payload);			
+			return Object.assign({}, state, { recipes: x, fullSetRecipes: x});
 
 		case ADD_RECIPE_FAILED:
 			console.warn('oh crap, add recipe failed');
@@ -51,12 +67,12 @@ export const recipeReducer: ActionReducer<RecipesStoreModel> = ( state = initial
 			return state;
 
 		case UPDATE_RECIPE:
-			let index = _.findIndex(state.recipes, { _id: action.payload._id });
+			let index = _.findIndex(state.fullSetRecipes, { _id: action.payload._id });
 			if(index >= 0) {
-				state.recipes = [
-					...state.recipes.slice(0, index),
+				state.fullSetRecipes = [
+					...state.fullSetRecipes.slice(0, index),
 					action.payload,
-					...state.recipes.slice(index + 1)
+					...state.fullSetRecipes.slice(index + 1)
 				];
 			}
 			return state;
@@ -69,13 +85,26 @@ export const recipeReducer: ActionReducer<RecipesStoreModel> = ( state = initial
 			console.log('you have deleted this recipe', action.payload._body, state);			
 			return Object.assign({}, state, 
 				{ 
-					recipes: state.recipes.filter(x => x._id !== action.payload._body)
+					fullSetRecipes: state.fullSetRecipes.filter(x => x._id !== action.payload._body)
 				}
 			);
 
 		case DELETE_RECIPE_FAILED:
 			console.warn('oh crap, you failed to delete that recipe => ', action.payload);
 			return state;
+
+		case UPDATE_FILTER:
+			//return state.map(person => filter(person, action));
+			let newFilter = state.filterCriteria.concat(action.payload);
+			let filteredSet = state.fullSetRecipes.filter(x => 	
+				(x.recipeName.toLowerCase().indexOf(action.payload.toLowerCase()) > -1 )
+			);
+			return Object.assign({}, state, { filterCriteria: newFilter, recipes: filteredSet });
+
+		case REMOVE_FILTER:
+			return Object.assign({}, state, { filterCriteria: '', recipes: state.fullSetRecipes });
+
+
 			
 
 		default:

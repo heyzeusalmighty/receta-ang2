@@ -39,32 +39,6 @@ export const tagReducer: ActionReducer<State> = (state = initialState, action: A
 			console.log('adding tag');
 			return state;
 
-		// case ADD_RECIPE:
-		// 	let x = state.recipes.concat(action.payload);
-		// 	return Object.assign({}, state, { recipes: x});
-
-		// case UPDATE_RECIPE:
-		// 	let index = _.findIndex(state.recipes, { _id: action.payload._id });
-		// 	if(index >= 0) {
-		// 		state.recipes = [
-		// 			...state.recipes.slice(0, index),
-		// 			action.payload,
-		// 			...state.recipes.slice(index + 1)
-		// 		];
-		// 	}
-		// 	return state;
-
-		// case DELETE_RECIPE:
-		// 	return state;
-		
-		// case GET_RECIPE:
-		// 	state.selectedRecipe = state.recipes.filter(rec => {
-		// 		return rec._id === action.payload._id;
-		// 	})[0];
-		// 	return state;
-
-			
-
 		default:
 			return state;
 	}
