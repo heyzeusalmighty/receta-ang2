@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { RecipesStoreModel } from '../models/recipeStoreModel';
-import { ADD_RECIPE } from '../reducers/recipe.reducer';
+import { ADD_RECIPE, GET_INSTRUCTIONS } from '../reducers/recipe.reducer';
 
 
 
@@ -57,6 +57,10 @@ export class YummlyService {
 		// 		this.store.dispatch({ type: ADD_RECIPE, payload: res.json()});
 		// 		return res.json();
 		// 	});
+	}
+
+	initiateScraping(recipeId : string)  {
+		this.store.dispatch({ type: GET_INSTRUCTIONS, payload: recipeId });		
 	}
 
 

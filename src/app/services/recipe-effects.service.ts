@@ -17,6 +17,7 @@ export class RecipeEffectsService {
 
 	private recipesUrl 	= 'http://localhost:3000/api/recipes';
 	private tagsUrl 	= 'http://localhost:3000/api/tags';
+	private yumUrl 		= 'http://localhost:3000/api/yummly';
 	private headers		= new Headers({ 'Content-Type': 'application/json' });
 	private options		= new RequestOptions({ headers: this.headers });
 
@@ -54,6 +55,12 @@ export class RecipeEffectsService {
 			.map( res => ({ type: 'DELETE_RECIPE_SUCCESS', payload: res}))			
 			.catch((err) => Observable.of({type: 'DELETE_RECIPE_FAILED'}) 
 		);
+
+	@Effect() getRecipeInstructions = this.actions$
+		.ofType('GET_INSTRUCTIONS')
+		.switchMap(action => this.http.post(`${this.yumUrl}/${action.payload}`, {}))
+			.map(res => ({ type: 'GET_INSTRUCTIONS_SUCCESS', payload: res}))
+			.catch((err) => Observable.of({type: 'GET_INSTRUCTIONS_FAILED'}));
 
 }
 

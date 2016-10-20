@@ -63,6 +63,7 @@ export class RecipeViewComponent implements OnInit {
 	scrapyScrapy(): void {
 		console.log('now you are scraping');
 		this.showScrapeButton = false;
+		this.yummlyService.initiateScraping(this.recipe._id);
 	}
 
 

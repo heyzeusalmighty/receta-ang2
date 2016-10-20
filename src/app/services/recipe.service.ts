@@ -51,10 +51,12 @@ export class RecipeService {
 	}
 
 	getRecipeObservable(id: string) {		
-		console.log('oh hi, getting recipe');
 		return this.recipes.filter(recs => {
 				return recs._id === id;
 		})[0];
+
+		
+
 	}
 
 	// add recipe to store

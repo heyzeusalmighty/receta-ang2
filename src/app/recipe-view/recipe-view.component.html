@@ -1,11 +1,15 @@
 
 
 <div *ngIf="recipe">
+	
 	<md-card>
 		<md-card-title>{{recipe.recipeName}}</md-card-title>
 		<md-card-subtitle>{{recipe.description}}</md-card-subtitle>		
 
-		<md-card-content>
+
+		<img md-card-image *ngIf="recipe.imageUrl" src="{{recipe.imageUrl}}" />
+
+		<md-card-content>		
 			<p>
 				<button type="button" class="mdl-chip" *ngFor="let tag of recipe.tags">
 					<span class="mdl-chip__text">{{tag}}</span>

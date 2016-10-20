@@ -27,8 +27,9 @@ export const DELETE_RECIPE_FAILED = 'DELETE_RECIPE_FAILED';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const REMOVE_FILTER = 'REMOVE_FILTER';
 
-
-export const GET_RECIPE = 'GET_RECIPE';
+export const GET_INSTRUCTIONS = 'GET_INSTRUCTIONS';
+export const GET_INSTRUCTIONS_SUCCESS = 'GET_INSTRUCTIONS_SUCCESS';
+export const GET_INSTRUCTIONS_FAILED = 'GET_INSTRUCTIONS_FAILED';
 
 let initialState = new RecipesStoreModel();
 
@@ -103,6 +104,18 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 
 		case REMOVE_FILTER:
 			return Object.assign({}, state, { filterCriteria: '', recipes: state.fullSetRecipes });
+
+		case GET_INSTRUCTIONS_SUCCESS:
+			let idx = _.findIndex(state.fullSetRecipes, { _id: action.payload._id });
+			if (idx >= 0) {
+				state.fullSetRecipes = [
+					...state.fullSetRecipes.slice(0, idx),
+					action.payload,
+					...state.fullSetRecipes.slice(index + 1)
+				];
+			}
+			return state;
+
 
 
 			

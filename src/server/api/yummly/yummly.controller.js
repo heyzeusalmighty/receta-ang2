@@ -89,11 +89,11 @@ exports.getInstructions = function(req, res) {
 
 		console.log('got the recipe, getting url ', rec.sourceUrl);
 
-		this.scrapeByUrl(rec.sourceUrl, (directions) => {
+		scrape(rec.sourceUrl, (directions) => {
 			Recipe.findOne({ _id: recipeId }, function (err, doc){
 				doc.instructions = directions;
 				doc.save();	
-				return res.status(200).send(directions);
+				return res.status(200).send(doc);
 			});
 		});
 		
@@ -101,13 +101,19 @@ exports.getInstructions = function(req, res) {
 }
 
 exports.scrapeByUrl = function(url, cb) {
+	return scrape(url, cb);	
+}
 
+
+function scrape(url, cb) {
 	let requestOptions = {
 		'url' : url
 	};
 	if(config.usingProxy) {
 		requestOptions.proxy = config.proxyAddress;
 	}
+
+	console.log(chalk.green('making the call now'))
 
 	request(requestOptions, function (error, response, body) {
 		if(error) {
@@ -156,18 +162,9 @@ exports.scrapeByUrl = function(url, cb) {
 				console.log(chalk.blue(dir.id), chalk.green(dir.instruction))
 			});
 			cb(directions);
-
-
-
 		}
-	});
-		
-		
-
-
+	});		
 }
-
-
 
 
 
