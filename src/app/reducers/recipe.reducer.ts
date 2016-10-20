@@ -19,6 +19,7 @@ export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const UPDATE_RECIPE_SUCCESS = 'UPDATE_RECIPE_SUCCESS';
 export const UPDATE_RECIPE_FAILED = 'UPDATE_RECIPE_FAILED';
 
+export const GET_RECIPE = 'GET_RECIPE';
 
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const DELETE_RECIPE_SUCCESS = 'DELETE_RECIPE_SUCCESS';
@@ -115,6 +116,10 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 				];
 			}
 			return state;
+
+		case GET_RECIPE:
+			let recIdx = _.findIndex(state.fullSetRecipes, { _id: action.payload._id });
+			return Object.assign({}, state, { selectedRecipe: state.fullSetRecipes[recIdx]});
 
 
 
