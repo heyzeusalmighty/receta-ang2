@@ -28,6 +28,10 @@ export const DELETE_RECIPE_FAILED = 'DELETE_RECIPE_FAILED';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const REMOVE_FILTER = 'REMOVE_FILTER';
 
+export const ADD_FILTER_TAG	= 'ADD_FILTER_TAG';
+export const DEL_FILTER_TAG = 'DEL_FILTER_TAG';
+
+
 export const GET_INSTRUCTIONS = 'GET_INSTRUCTIONS';
 export const GET_INSTRUCTIONS_SUCCESS = 'GET_INSTRUCTIONS_SUCCESS';
 export const GET_INSTRUCTIONS_FAILED = 'GET_INSTRUCTIONS_FAILED';
@@ -53,8 +57,21 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 
 		case LOAD_RECIPES_SUCCESS:
 		case ADD_RECIPE_SUCCESS:
+			// check to see if this was an update
+			let addIdx = _.findIndex(state.fullSetRecipes, { recipeName: action.payload.recipeName });
+			if(addIdx >= 0) {
+				state.fullSetRecipes = [
+					...state.fullSetRecipes.slice(0, addIdx),
+					action.payload,
+					...state.fullSetRecipes.slice(addIdx + 1)
+				];
+				return state;
+			}
+
 			let x = state.recipes.concat(action.payload);			
 			return Object.assign({}, state, { recipes: x, fullSetRecipes: x});
+		
+			
 
 		case ADD_RECIPE_FAILED:
 			console.warn('oh crap, add recipe failed');
@@ -96,7 +113,6 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 			return state;
 
 		case UPDATE_FILTER:
-			//return state.map(person => filter(person, action));
 			let newFilter = state.filterCriteria.concat(action.payload);
 			let filteredSet = state.fullSetRecipes.filter(x => 	
 				(x.recipeName.toLowerCase().indexOf(action.payload.toLowerCase()) > -1 )
@@ -121,7 +137,22 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 			let recIdx = _.findIndex(state.fullSetRecipes, { _id: action.payload._id });
 			return Object.assign({}, state, { selectedRecipe: state.fullSetRecipes[recIdx]});
 
+		case ADD_FILTER_TAG:			
+			if ( state.filterTags.indexOf(action.payload) === -1) {
+				let tags = state.filterTags.concat(action.payload);
+				let filteredByTags = state.fullSetRecipes.filter(x => 
+					x.tags.some(t => tags.indexOf(t) >= 0)
+				);
+				return Object.assign({}, state, { filterTags: tags, recipes: filteredByTags });
+			}
+			return state;
 
+		case DEL_FILTER_TAG:
+			return Object.assign({}, state,
+				{
+					filterTags: state.filterTags.filter(x => x !== action.payload),
+					recipes: state.fullSetRecipes.filter(x => x.tags.some(t => state.filterTags.indexOf(t) >= 0))	
+				});			
 
 			
 
@@ -129,4 +160,6 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 			return state;
 	}
 };
+
+
 

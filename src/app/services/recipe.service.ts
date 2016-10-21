@@ -8,7 +8,9 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, UPDATE_FILTER, REMOVE_FILTER } from '../reducers/recipe.reducer';
+import { ADD_RECIPE, LOAD_RECIPES, DELETE_RECIPE, UPDATE_FILTER, REMOVE_FILTER, 
+	ADD_FILTER_TAG, DEL_FILTER_TAG } from '../reducers/recipe.reducer';
+
 import { ADD_TAG, LOAD_TAGS } from '../reducers/tag.reducer';
 import { Store } from '@ngrx/store';
 
@@ -21,11 +23,15 @@ export class RecipeService {
 	tagStore: Observable<any>;
 	recipes: Array<any>;
 	tags: Array<any>;
+	filterTags: Array<any>;
 	selectedRecipe: Recipe;
 
 	constructor (private http: Http, private store: Store<RecipesStoreModel>) {
 		this.recipeStore = store.select('recipe');
-		this.recipeStore.subscribe(data => this.recipes = data.recipes);
+		this.recipeStore.subscribe(data => {
+			this.recipes = data.recipes;
+			this.filterTags = data.filterTags;
+		});
 
 		this.tagStore = store.select('tag');
 
@@ -54,9 +60,6 @@ export class RecipeService {
 		return this.recipes.filter(recs => {
 				return recs._id === id;
 		})[0];
-
-		
-
 	}
 
 	// add recipe to store
@@ -90,6 +93,14 @@ export class RecipeService {
 		(searchString.length === 0) 
 			? this.store.dispatch({ type: REMOVE_FILTER, payload: searchString }) 
 			: this.store.dispatch({ type: UPDATE_FILTER, payload: searchString });
+	}
+
+	addFilterTag(tag: string) {
+		this.store.dispatch({ type: ADD_FILTER_TAG, payload: tag });
+	}
+
+	deleteFilterTag(tag: string) {
+		this.store.dispatch({ type: DEL_FILTER_TAG, payload: tag });
 	}
 
 

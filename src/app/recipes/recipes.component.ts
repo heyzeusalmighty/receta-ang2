@@ -19,6 +19,7 @@ export class RecipesComponent implements OnInit {
 	recipeStore : Observable<any>;
 	tagStore : Observable<any>;
 	tags: RecipeTag[];
+	filterTags: Array<any>;
 	searchString : string;
 	searchingFlag : boolean = false;
 
@@ -39,7 +40,10 @@ export class RecipesComponent implements OnInit {
 
 	getRecipes(): void {
 		this.recipeStore = this.recipeService.getRecipeStoreObservable();
-		this.recipeStore.subscribe(data => this.recentRecipes = data.recipes);
+		this.recipeStore.subscribe(data => {
+			this.recentRecipes = data.recipes; 
+			this.filterTags = data.filterTags; 
+		});
 
 		this.tagStore = this.recipeService.getTagStoreObservable();
 		this.tagStore.subscribe( data => this.tags = data.tags);
@@ -57,6 +61,11 @@ export class RecipesComponent implements OnInit {
 
 	filterByTag(tag: RecipeTag): void {
 		console.log(' filtering by ', tag.name);
+		this.recipeService.addFilterTag(tag.name);
+	}
+
+	removeFilterTag(tag: string) : void {
+		console.log('removing tag => ', tag)
 	}
 
 	search() : void {

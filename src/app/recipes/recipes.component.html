@@ -34,6 +34,17 @@
 
 		</div>
 
+		<div *ngIf="filterTags.length > 0">
+			
+			<span class="mdl-chip mdl-chip--deletable" *ngFor="let tag of filterTags">
+				<span class="mdl-chip__text">{{tag}}</span>
+				<button type="button" class="mdl-chip__action" (click)="removeFilterTag(tag)">
+					<i class="material-icons">cancel</i>
+				</button>
+			</span>
+
+		</div>
+
 		<md-list>
 			<md-list-item *ngFor="let recipe of recentRecipes" (click)="gotoRecipe(recipe)">
 				<img md-list-avatar src="assets/monkeys.jpg" alt="monkey">

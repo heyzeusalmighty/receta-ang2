@@ -7,11 +7,13 @@ export class RecipesStoreModel {
 	tags: Array<RecipeTag> = [];
 	selectedRecipe: Recipe;
 	filterCriteria: string;
+	filterTags: Array<string>;
 
 	constructor() {
 		this.recipes = [];
 		this.fullSetRecipes = [];
 		this.tags = [];
 		this.filterCriteria = '';
+		this.filterTags = [];
 	}
 };
