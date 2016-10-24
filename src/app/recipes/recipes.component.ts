@@ -59,13 +59,12 @@ export class RecipesComponent implements OnInit {
 		this.router.navigate(link);
 	}
 
-	filterByTag(tag: RecipeTag): void {
-		console.log(' filtering by ', tag.name);
+	filterByTag(tag: RecipeTag): void {		
 		this.recipeService.addFilterTag(tag.name);
 	}
 
 	removeFilterTag(tag: string) : void {
-		console.log('removing tag => ', tag)
+		this.recipeService.deleteFilterTag(tag);
 	}
 
 	search() : void {

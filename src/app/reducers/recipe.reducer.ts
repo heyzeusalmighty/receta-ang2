@@ -148,10 +148,16 @@ export const recipeReducer : ActionReducer<RecipesStoreModel> = ( state = initia
 			return state;
 
 		case DEL_FILTER_TAG:
+			let revisedTags = state.filterTags.filter(x => x !== action.payload);
+			
+			let delFilter = (revisedTags.length === 0) 
+				? state.fullSetRecipes 
+				: state.fullSetRecipes.filter(x => x.tags.some(t => revisedTags.indexOf(t) >= 0));
+			
 			return Object.assign({}, state,
 				{
-					filterTags: state.filterTags.filter(x => x !== action.payload),
-					recipes: state.fullSetRecipes.filter(x => x.tags.some(t => state.filterTags.indexOf(t) >= 0))	
+					filterTags: revisedTags,
+					recipes: delFilter	
 				});			
 
 			
