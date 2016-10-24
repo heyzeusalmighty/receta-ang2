@@ -9,9 +9,9 @@ import { RecipeService } from '../services/recipe.service';
 
 
 @Component({
-  selector: 'app-recipe-detail',
-  templateUrl: 'recipe-detail.component.html',
-  styleUrls: ['recipe-detail.component.css']
+	selector: 'app-recipe-detail',
+	templateUrl: 'recipe-detail.component.html',
+	styleUrls: ['recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
 	@Input() recipe: Recipe;
@@ -28,9 +28,18 @@ export class RecipeDetailComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		let urlPath = this.route.snapshot.url[0].path;
 		
-		if(urlPath !== 'new') {
+		//first lets get some tags
+		this.tagStore = this.recipeService.getTagStoreObservable();
+		this.tagStore.subscribe(data => this.tags = data.tags);
+
+		// sometimes this gets persisted, turn them all off by default
+		this.tags.forEach(tag => tag.selected = false);
+		
+		let urlPath = this.route.snapshot.url[0].path;
+		if(urlPath === 'new') {
+			this.recipe = new Recipe();			
+		} else {
 			this.route.params.forEach((params: Params) => {
 				let id = params['id'];
 				if(id.length > 0) {
@@ -44,22 +53,12 @@ export class RecipeDetailComponent implements OnInit {
 						}
 					);
 
-					this.tagStore = this.recipeService.getTagStoreObservable();
-					this.tagStore.subscribe(
-						data => {
-							this.tags = data.tags;
-							this.tags.forEach((tag) => {
-								tag.selected = (this.recipe.tags.indexOf(tag.name) > -1);								
-							});
-						}
-					);				
+					this.tags.forEach((tag) => {
+						tag.selected = (this.recipe.tags.indexOf(tag.name) > -1);
+					});
 				}
 			});
-		} else {
-			//this is a new recipe clearly
-			this.recipe = new Recipe();
-			
-		}		
+		}	
 	}
 
 

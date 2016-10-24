@@ -14,8 +14,11 @@
 
 		<!-- TAGS -->
 		<div>
-			<div><strong>TAGS</strong></div>
+			<div>
+				<strong>TAGS</strong>				
+			</div>
 
+			<app-add-new-tag class="addTagSection"></app-add-new-tag>
 			<span *ngFor="let tag of tags" class="tag-button">
 				<button md-raised-button color="primary" *ngIf="tag.selected" (click)="toggleTag(tag)">{{ tag.name }}</button>
 				<button md-button *ngIf="!tag.selected" (click)="toggleTag(tag)">{{ tag.name }}</button>
